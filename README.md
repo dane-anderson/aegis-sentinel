@@ -1,186 +1,72 @@
-<div align="center">
+# AEGIS Dynamics · Project Sentinel
 
-# A E G I S
-### Intelligence for an uncertain world.
+[Sentinel Command](https://aegis-sentinel-6u5m.onrender.com/#command) connects the fictional AEGIS research world to real Unity ML-Agents experiments.
 
-**PROJECT SENTINEL · REINFORCEMENT LEARNING**
+Rick navigates, Negan protects, and Scout reports safe routes. Their three Sentinel policies share mission rewards. The dashboard shows exact episode outcomes separately for training, scripted demonstrations, and saved-policy evaluation. Training reward is never treated as a success rate.
 
-Unity ML-Agents · Proximal Policy Optimization (PPO) · TensorBoard
+## Connected evidence
 
-[**Explore AEGIS ↗**](https://aegis-sentinel-6u5m.onrender.com/) &nbsp; · &nbsp; [**Enter Sentinel Command ↗**](https://aegis-sentinel-6u5m.onrender.com/#command) &nbsp; · &nbsp; [**The Unity project ↗**](https://github.com/dane-anderson/days_gone_quiet)
+Unity's `SentinelTelemetry` writes append-only local JSONL records. Each episode includes its identity, mode, run identity when launched through the connected launcher, route milestones and times, survival, per-agent health/movement/reward/kills, environment fingerprint and settings, and saved model hashes where available. Interrupted episodes do not enter completion denominators. Mechanics validation and mixed-policy sessions are excluded from the primary categories.
 
-<a href="https://aegis-sentinel-6u5m.onrender.com/">
-  <img src="public/assets/aegis-headquarters.jpg" alt="AEGIS headquarters concept art: monumental graphite towers above a rain-soaked futuristic city" width="100%">
-</a>
+`export_research.py` reads the three selected historical runs plus new `sentinel-*` runs. It discovers the role policies from configuration, handles missing checkpoints and absent scalar tags, defers incomplete final JSONL lines, deduplicates episode identities, and fails on conflicting or corrupt completed evidence. A missing results folder does not replace good public data with an empty snapshot. Source paths are relative, machine-specific event filenames are removed, and model weights and private notebook contents are not published.
 
-*Advanced autonomous systems. Decisions under uncertainty.*
+Groups separate run, mode, source fingerprint, model hashes and experiment settings. Every outcome denominator counts an episode once, rather than once per policy. The downloaded snapshot contains the full episode evidence. Historical runs lack exact scene fingerprints and are labeled accordingly. No matched baseline has established a causal benefit from cooperation; requiring all three roles by design is not proof of that benefit.
 
-</div>
+## Athena
 
----
+`scripts/athena_brief.py` calls the existing local Ollama service on loopback with `qwen3.5:9b`. Athena receives verified facts, grouped episode outcomes, the latest 12 relevant episodes, role checkpoint details and recent reward samples. Her response selects important evidence references and a next experiment. Public finding wording and numbers come directly from the validated fact catalog, preventing model-written invented measurements. Each briefing records its model, generation time and exact snapshot fingerprint. No new paid API is required.
 
-## The future will not think with one mind.
+If the local model is unavailable, measurements can still publish while the site clearly reports that Athena's AI briefing is unavailable. It retries on a later sync. This is a batch AI research briefing. The executive video remains a prerecorded fictional transmission; live conversation, persistent memory and interactive voice are future work. Browser notebook entries stay local.
 
-**Intelligence must learn to operate in a world it cannot fully predict.**
+## Local connection
 
-AEGIS Dynamics explores autonomous learning, distributed intelligence, and adaptation. **Project Sentinel** is its flagship **reinforcement learning** research initiative: an investigation into how independent learning agents might become more capable together.
+Use Python with TensorBoard and PyYAML (the existing ML-Agents environment includes both). Keep private connection configuration outside this repository:
 
-The first experimental world is [**Days Gone Quiet**](https://github.com/dane-anderson/days_gone_quiet). Within its Unity environment, two independent policies are trained with **Proximal Policy Optimization (PPO)** through **Unity ML-Agents**. Rick learns escape behavior; Negan learns simulated combat. Agents learn through observations, actions, and rewards, with training signals recorded in **TensorBoard**. Two policies. Separate objectives. A shared world that pushes back.
-
-Sentinel Command brings the records into view. Athena, Chief Intelligence Officer, gives the fictional organization its executive presence. Her mandate: challenge assumptions, examine evidence, and ask the question everyone else missed.
-
-```text
-AEGIS DYNAMICS
-└── PROJECT SENTINEL                 Research initiative
-    ├── SENTINEL COMMAND             Research headquarters
-    └── DAYS GONE QUIET              Experimental environment 001
+```json
+{
+  "results": ["/path/to/results"],
+  "telemetry": ["/path/to/results/sentinel-telemetry"],
+  "model": "qwen3.5:9b"
+}
 ```
 
-## A transmission from Athena
-
-> **“Days Gone Quiet is only the beginning.”**
-
-Meet AEGIS's fictional Chief Intelligence Officer. A ten-second transmission from the executive office, created with Runway.
-
-https://github.com/user-attachments/assets/67c82771-ed6d-4ea9-8632-5fc92452f115
-
-[**Enter Athena’s office ↗**](https://aegis-sentinel-6u5m.onrender.com/#briefing) &nbsp; · &nbsp; [**Download the transmission ↓**](https://aegis-sentinel-6u5m.onrender.com/assets/athena-transmission.mp4)
-
-*AI-generated character performance and voice. The defense-intelligence mission is part of the AEGIS fiction; the reinforcement learning experiments and recorded evidence are described below.*
-
-## Step inside
-
-| Destination | What you can explore |
-| :--- | :--- |
-| [**AEGIS headquarters**](https://aegis-sentinel-6u5m.onrender.com/) | The organization, its mission, and its research mandate. |
-| [**Sentinel Command**](https://aegis-sentinel-6u5m.onrender.com/#command) | A research dashboard with recorded training signals, experiment records, and source evidence. |
-| [**Training records**](https://aegis-sentinel-6u5m.onrender.com/#runs) | Run and policy selectors, original reward curves, accessible tables, and a downloadable snapshot. |
-| [**Athena's office**](https://aegis-sentinel-6u5m.onrender.com/#briefing) | A cinematic mission transmission with replay, a curated executive briefing, and a browser-local research notebook. |
-| [**Research roadmap**](https://aegis-sentinel-6u5m.onrender.com/#roadmap) | The path toward controlled evaluation, cooperation, and a connected research workspace. |
-
-<a href="https://aegis-sentinel-6u5m.onrender.com/#command">
-  <img src="public/assets/sentinel-command.jpg" alt="Sentinel Command concept art: a vast graphite and steel-blue research theater" width="100%">
-</a>
-
-*Sentinel Command facility concept. The dashboard presents recorded research data; this image is not live telemetry.*
-
-## Evidence before claims
-
-The public dashboard contains a **curated snapshot exported October 9, 2026**:
-
-| Selected run | Rick checkpoint | Negan checkpoint | Reward samples, both policies |
-| :--- | ---: | ---: | ---: |
-| `prison-duo-v2` | 108,541 steps | 108,541 steps | 434 |
-| `barn-team-v2` | 2,264 steps | 2,264 steps | 8 |
-| `prison-duo-v1` | 124,307 steps | 124,307 steps | 496 |
-| **Snapshot total** | **3 runs** | **6 policy records** | **938 samples** |
-
-Every chart uses original `Environment/Cumulative Reward` scalars without smoothing. The source manifest includes SHA-256 hashes, and the [research JSON](public/data/research.json) is available to inspect.
-
-> **A recorded reward is a training signal, not a success rate.** Rick and Negan have different reward functions. Reliable escape, combat performance, cooperative improvement, and transfer between environments still need controlled evaluation.
-
-## Available now / next to build
-
-| Available now | Planned |
-| :--- | :--- |
-| Public cinematic website, responsive on desktop and phone | Server-side authenticated private workspace |
-| Recorded training curves, evidence manifest, snapshot download | Automated experiment ingestion and a research database |
-| Hypotheses and research roadmap | Repeated-seed evaluation, cooperation, and transfer experiments |
-| Athena's recorded transmission, curated brief, and browser-local notebook | Source-grounded AI conversation, research memory, and voice |
-
-The dashboard is public and its live feed is disconnected. Notebook entries stay in the current browser unless you download them. Athena is a fictional executive; her transmission is a prerecorded, AI-generated character video, and no live AI model or interactive voice service is connected. The video plays once on entering her office when browser settings allow, has native playback controls and a replay button, and pauses when you leave. Reduced-motion preferences disable automatic playback. The original MP4 is hosted with the site so playback does not depend on an expiring media link.
-
-## Built to grow
-
-```text
-Days Gone Quiet                         AEGIS / Project Sentinel
-Unity + ML-Agents                       Public site + Sentinel Command
-        │                                          ▲
-        └── local training records ── reviewed JSON ┘
-                 TensorBoard          manual export
-```
-
-**HTML · CSS · JavaScript · Render** — a static site with no application build step. Unity training stays in its own repository and environment.
-
-## Run locally
+Prepare a snapshot and AI brief:
 
 ```sh
-git clone https://github.com/dane-anderson/aegis-sentinel.git
-cd aegis-sentinel
-python3 -m http.server 4173 --bind 127.0.0.1 --directory public
+python scripts/sync_research.py --config /path/to/private-sync-config.json
 ```
 
-Open http://127.0.0.1:4173. Use an HTTP server: opening the HTML file directly will not load the research JSON.
-
-No application dependencies or build are required. Fonts are served by Google Fonts, with local system-font fallbacks.
-
-<details>
-<summary><strong>Render deployment</strong></summary>
-
-The live site is [aegis-sentinel-6u5m.onrender.com](https://aegis-sentinel-6u5m.onrender.com/), deployed from this repository's `main` branch.
-
-For another deployment, create a **Static Site**, use the `main` branch, set build command to `echo 'Static assets ready'`, and publish directory to `public`. [render.yaml](render.yaml) records the static-site configuration and optional response headers. Account usage limits apply; no custom domain is required.
-
-</details>
-
-<details>
-<summary><strong>Data provenance and refreshing the snapshot</strong></summary>
-
-`public/data/research.json` contains the selected snapshot. It was exported read-only from local ML-Agents output on October 9, 2026. The original Unity repository and training output were not edited by this web project.
-
-The three selected runs are `prison-duo-v2`, `barn-team-v2`, and `prison-duo-v1`. Exported sources include training status, run configuration, and TensorBoard scalar files. SHA-256 hashes record each source file. Machine-specific event filenames are redacted from the public manifest. Model weights, absolute filesystem paths, and research notebook contents are not published.
-
-The public Unity source revision is context; local work includes changes that have not been committed. Exact environment revisions and evaluation seeds were not recorded for these runs. Environment names are descriptive run labels. A saved checkpoint below its step target does not establish why training ended, and no current process state is inferred.
-
-The chart shows every retained `Environment/Cumulative Reward` scalar without smoothing. Checkpoint summary reward is a different record and may not equal the last TensorBoard scalar. Rick and Negan use different reward functions. Reward is not a success percentage or proof of cooperation, reliable task performance, or transfer.
-
-To refresh using a Python environment with TensorBoard and PyYAML installed:
+For unattended publication, start with a clean, current `main` checkout:
 
 ```sh
-python scripts/export_research.py --results /path/to/results --output public/data/research.json
+python scripts/sync_research.py --config /path/to/private-sync-config.json --publish
 ```
 
-Review the selected runs and snapshot before publishing. The exporter only reads existing records; it does not start, stop, resume, or modify training. Refreshing is a manual action, not an installed automation.
+The publisher locks the checkout, validates both files, commits only `public/data/research.json` and `public/data/athena.json`, and pushes to the existing remote. It refuses unrelated dirty edits, other branches, remote divergence, and unpublished implementation commits. A network-failed push can retry its own data-only commit. Unchanged evidence with a current briefing produces no commit or model call. Do not put private configuration or credentials in `public/`.
 
-</details>
+The user's connected Unity launcher publishes when training finishes. A Codex heartbeat periodically catches new local episode results; it requires that computer and Codex to be available. The site polls for published snapshots every minute and displays the evidence timestamp. This is not a live Unity stream. Render deploys after a successful push, so publication is not instantaneous.
 
-<details>
-<summary><strong>Repository map and validation</strong></summary>
+In Unity, `Assets/Sentinel/Tools/train_connected.py --run-id=sentinel-phase1-v1` uses the current Python environment's `mlagents-learn`, creates a temporary manifest binding telemetry to the run, and calls the sync on completion. Local `UserSettings/SentinelConnection.json` configures `trainerPort`, `syncScript`, and `syncConfig`. Stop competing trainers, use a fresh run ID or `--resume`, and press Play in SentinelCooperation. `--no-publish` is available for connection tests. Existing prison and barn policies have incompatible observation shapes and must not be assigned to the Sentinel agents.
 
-```text
-public/
-  index.html             Public site and command workspace
-  styles.css             Responsive visual design
-  app.js                 Navigation, charts, evidence, and notebook
-  assets/                Headquarters, command theater, and character art
-  data/research.json     Reviewed training snapshot and source manifest
-scripts/
-  export_research.py     Read-only exporter for existing training records
-  check_site.py          Static-asset and research-snapshot checks
-render.yaml              Render static-site configuration
-IMAGE-PROMPTS.txt         Image prompts and generation method
-```
-
-Check the static package and snapshot:
+## Preview and checks
 
 ```sh
-python3 scripts/check_site.py
+python -m http.server 4173 --bind 127.0.0.1 --directory public
+python -m unittest discover -s scripts -p test_connection.py
+python scripts/check_site.py
+node --check public/app.js
 ```
 
-</details>
+The site is static HTML/CSS/JavaScript hosted on Render from `main`, using publish directory `public`. `render.yaml` records the configuration. No browser credentials or local model service are exposed to visitors.
 
-## Art and identity
+## Files
 
-The AEGIS headquarters, Sentinel Command theater, and Athena portrait are original AI-generated concept assets. See the [image prompts and generation method](IMAGE-PROMPTS.txt). The Days Gone Quiet artwork is environment concept art from the Unity project, not a capture of a running scene.
+- `public/index.html`, `app.js`, `styles.css`: public site and cooperation dashboard.
+- `public/data/research.json`: training records, episode evidence, hashes and fact catalog.
+- `public/data/athena.json`: current model-selected briefing and source reference.
+- `scripts/export_research.py`: read-only, allowlisted data export.
+- `scripts/athena_brief.py`: bounded local AI briefing.
+- `scripts/sync_research.py`: validated preparation and optional publication.
+- `scripts/test_connection.py`, `check_site.py`: evidence and package checks.
 
-AEGIS is a working fictional identity, unaffiliated with other organizations using the name. This is an independent learning and research project; it does not represent an operational defense company.
-
----
-
-<div align="center">
-
-**The world is imagined. The questions are real.**
-
-[Explore AEGIS](https://aegis-sentinel-6u5m.onrender.com/) &nbsp; · &nbsp; [Follow the evidence](https://aegis-sentinel-6u5m.onrender.com/#runs) &nbsp; · &nbsp; [Enter Days Gone Quiet](https://github.com/dane-anderson/days_gone_quiet)
-
-</div>
+Facility and character artwork are AI-generated concepts; Unity concept art is not a simulation capture. AEGIS is a fictional working identity for an independent research project, unaffiliated with other AEGIS organizations. See [image prompts and generation method](IMAGE-PROMPTS.txt).

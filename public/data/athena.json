@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "status": "ready",
+  "sourceSnapshotHash": "c9b8896dd20ae157d51b8901d69c37484670fee325e81647cff2bd247034c362",
+  "generatedAt": "2026-10-09T23:23:22.875135+00:00",
+  "model": "qwen3.5:9b",
+  "method": "AI-selected findings from verified measurements; wording and numbers come from the evidence catalog. Batch briefing, not live chat.",
+  "findings": [
+    {
+      "id": "training-outcomes",
+      "text": "Training: 0 mission completions in 2 completed episodes. Interrupted episodes are excluded. Different configurations are listed separately in the dashboard."
+    },
+    {
+      "id": "scripted_demo-outcomes",
+      "text": "Scripted demonstration: 11 mission completions in 11 completed episodes. Interrupted episodes are excluded. Different configurations are listed separately in the dashboard."
+    },
+    {
+      "id": "evidence-boundary",
+      "text": "Scripted demonstrations and mechanics validation do not establish learned cooperation. Completing the mission requires all three roles by design; no matched baseline has yet measured a causal improvement from cooperation."
+    }
+  ],
+  "nextExperiment": "Continue the three role policies, then evaluate frozen models on held-out routes. Compare mission outcomes and the Scout \u2192 Rick handoff, not reward alone."
+}
