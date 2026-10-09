@@ -10,8 +10,8 @@ class SiteParser(HTMLParser):
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
         if 'id' in a:self.ids.append(a['id'])
-        if tag in ('img','script','link'):
-            for key in ('src','href'):
+        if tag in ('img','script','link','video','source','track'):
+            for key in ('src','href','poster'):
                 if a.get(key,'').startswith('/'):self.files.append(a[key])
 p=SiteParser();p.feed((public/'index.html').read_text())
 assert len(p.ids)==len(set(p.ids)), 'Duplicate element IDs'

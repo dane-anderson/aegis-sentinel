@@ -43,7 +43,7 @@ AEGIS DYNAMICS
 | [**AEGIS headquarters**](https://aegis-sentinel-6u5m.onrender.com/) | The organization, its mission, and its research mandate. |
 | [**Sentinel Command**](https://aegis-sentinel-6u5m.onrender.com/#command) | A research dashboard with recorded training signals, experiment records, and source evidence. |
 | [**Training records**](https://aegis-sentinel-6u5m.onrender.com/#runs) | Run and policy selectors, original reward curves, accessible tables, and a downloadable snapshot. |
-| [**Athena's office**](https://aegis-sentinel-6u5m.onrender.com/#briefing) | A curated executive briefing and a research notebook saved in your current browser. |
+| [**Athena's office**](https://aegis-sentinel-6u5m.onrender.com/#briefing) | A cinematic mission transmission with replay, a curated executive briefing, and a browser-local research notebook. |
 | [**Research roadmap**](https://aegis-sentinel-6u5m.onrender.com/#roadmap) | The path toward controlled evaluation, cooperation, and a connected research workspace. |
 
 <a href="https://aegis-sentinel-6u5m.onrender.com/#command">
@@ -74,9 +74,9 @@ Every chart uses original `Environment/Cumulative Reward` scalars without smooth
 | Public cinematic website, responsive on desktop and phone | Server-side authenticated private workspace |
 | Recorded training curves, evidence manifest, snapshot download | Automated experiment ingestion and a research database |
 | Hypotheses and research roadmap | Repeated-seed evaluation, cooperation, and transfer experiments |
-| Athena's profile, curated brief, and browser-local notebook | Source-grounded AI conversation, research memory, and voice |
+| Athena's recorded transmission, curated brief, and browser-local notebook | Source-grounded AI conversation, research memory, and voice |
 
-The dashboard is public and its live feed is disconnected. Notebook entries stay in the current browser unless you download them. Athena is a fictional executive; no live AI model or voice service is connected.
+The dashboard is public and its live feed is disconnected. Notebook entries stay in the current browser unless you download them. Athena is a fictional executive; her transmission is a prerecorded, AI-generated character video, and no live AI model or interactive voice service is connected. The video plays once on entering her office when browser settings allow, has native playback controls and a replay button, and pauses when you leave. Reduced-motion preferences disable automatic playback. The original MP4 is hosted with the site so playback does not depend on an expiring media link.
 
 ## Built to grow
 

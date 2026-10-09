@@ -96,6 +96,57 @@ function wire() {
   }
 }
 function routeName(){return location.hash.slice(1)||'home';}
+const office = $('#office-transmission');
+const athenaVideo = $('#athena-video');
+const transmissionStatus = $('#transmission-status');
+const replayTransmission = $('#replay-transmission');
+let officeOpen = false, playbackAttempt = 0;
+function playTransmission() {
+  const attempt = ++playbackAttempt;
+  athenaVideo.currentTime = 0;
+  transmissionStatus.textContent = 'Opening transmission…';
+  athenaVideo.play().catch(error => {
+    if(attempt !== playbackAttempt || !officeOpen) return;
+    replayTransmission.innerHTML = 'Play transmission <span aria-hidden="true">▷</span>';
+    transmissionStatus.textContent = error.name === 'NotAllowedError'
+      ? 'Press Play transmission to hear Athena.'
+      : 'Playback unavailable. Try Play transmission or open the download.';
+  });
+}
+function syncOffice() {
+  const entering = routeName() === 'briefing';
+  office.hidden = !entering;
+  if(entering === officeOpen) return;
+  officeOpen = entering;
+  if(!entering) { ++playbackAttempt; athenaVideo.pause(); return; }
+  replayTransmission.innerHTML = 'Play transmission <span aria-hidden="true">▷</span>';
+  transmissionStatus.textContent = 'Transmission ready. Press play to hear Athena.';
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches && !document.hidden) playTransmission();
+}
+replayTransmission.addEventListener('click', playTransmission);
+athenaVideo.addEventListener('playing', () => {
+  if(!officeOpen) { athenaVideo.pause(); return; }
+  replayTransmission.innerHTML = 'Replay transmission <span aria-hidden="true">↻</span>';
+  transmissionStatus.textContent = 'Transmission playing. Playback controls are below the video.';
+});
+athenaVideo.addEventListener('pause', () => {
+  if(officeOpen && !athenaVideo.ended) transmissionStatus.textContent = 'Transmission paused. Resume in the player or replay from the beginning.';
+});
+athenaVideo.addEventListener('ended', () => {
+  transmissionStatus.textContent = 'Transmission complete. Replay whenever you like.';
+});
+athenaVideo.addEventListener('error', () => {
+  transmissionStatus.textContent = 'Transmission could not load. Try the download link.';
+});
+document.addEventListener('visibilitychange', () => { if(document.hidden) athenaVideo.pause(); });
+// Start within the entry click so browsers can allow speech after user interaction.
+document.addEventListener('click', event => {
+  const link = event.target.closest('a[href="#briefing"]');
+  if(!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  if(routeName() !== 'briefing') location.hash = 'briefing';
+  route();
+});
 function renderContent() {
   const section=routeName();if(!sections.includes(section))return;
   const root=$('#dashboard-content');
@@ -108,7 +159,8 @@ function route() {
   $('#public-site').hidden=command;$('#command-site').hidden=!command;document.body.classList.toggle('public-view',!command);document.body.classList.toggle('command-view',command);
   $$('.sidebar nav a').forEach(a=>{a.classList.toggle('active',a.dataset.section===name);if(a.dataset.section===name)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   document.title=command?'Sentinel Command — AEGIS':'AEGIS Dynamics — Intelligence for an uncertain world.';
-  if(command){renderContent();window.scrollTo(0,0);}else{requestAnimationFrame(()=>document.getElementById(name)?.scrollIntoView());}
+  syncOffice();
+  if(command){renderContent();window.scrollTo({top:0,behavior:'instant'});}else{requestAnimationFrame(()=>document.getElementById(name)?.scrollIntoView());}
 }
 $('#close-dialog').addEventListener('click',()=>$('#evidence-dialog').close());
 $('#evidence-dialog').addEventListener('click',e=>{if(e.target===$('#evidence-dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
