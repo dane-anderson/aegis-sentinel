@@ -1,0 +1,19 @@
+services:
+  - type: web
+    runtime: static
+    name: aegis-sentinel
+    repo: https://github.com/dane-anderson/aegis-sentinel
+    branch: main
+    buildCommand: echo 'Static assets ready'
+    staticPublishPath: public
+    autoDeployTrigger: commit
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
