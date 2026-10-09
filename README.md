@@ -36,6 +36,18 @@ AEGIS DYNAMICS
     └── DAYS GONE QUIET              Experimental environment 001
 ```
 
+## A transmission from Athena
+
+> **“Days Gone Quiet is only the beginning.”**
+
+Meet AEGIS's fictional Chief Intelligence Officer. A ten-second transmission from the executive office, created with Runway.
+
+https://github.com/user-attachments/assets/67c82771-ed6d-4ea9-8632-5fc92452f115
+
+[**Enter Athena’s office ↗**](https://aegis-sentinel-6u5m.onrender.com/#briefing) &nbsp; · &nbsp; [**Download the transmission ↓**](https://aegis-sentinel-6u5m.onrender.com/assets/athena-transmission.mp4)
+
+*AI-generated character performance and voice. The defense-intelligence mission is part of the AEGIS fiction; the reinforcement learning experiments and recorded evidence are described below.*
+
 ## Step inside
 
 | Destination | What you can explore |
