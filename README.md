@@ -3,7 +3,9 @@
 # A E G I S
 ### Intelligence for an uncertain world.
 
-**PROJECT SENTINEL · AUTONOMOUS SYSTEMS · DISTRIBUTED INTELLIGENCE**
+**PROJECT SENTINEL · REINFORCEMENT LEARNING**
+
+Unity ML-Agents · Proximal Policy Optimization (PPO) · TensorBoard
 
 [**Explore AEGIS ↗**](https://aegis-sentinel-6u5m.onrender.com/) &nbsp; · &nbsp; [**Enter Sentinel Command ↗**](https://aegis-sentinel-6u5m.onrender.com/#command) &nbsp; · &nbsp; [**The Unity project ↗**](https://github.com/dane-anderson/days_gone_quiet)
 
@@ -21,9 +23,9 @@
 
 **Intelligence must learn to operate in a world it cannot fully predict.**
 
-AEGIS Dynamics explores autonomous learning, distributed intelligence, and adaptation. **Project Sentinel** is its flagship research initiative: an investigation into how independent learning agents might become more capable together.
+AEGIS Dynamics explores autonomous learning, distributed intelligence, and adaptation. **Project Sentinel** is its flagship **reinforcement learning** research initiative: an investigation into how independent learning agents might become more capable together.
 
-The first experimental world is [**Days Gone Quiet**](https://github.com/dane-anderson/days_gone_quiet). Within its Unity environment, Rick learns escape behavior and Negan learns simulated combat. Two policies. Separate objectives. A shared world that pushes back.
+The first experimental world is [**Days Gone Quiet**](https://github.com/dane-anderson/days_gone_quiet). Within its Unity environment, two independent policies are trained with **Proximal Policy Optimization (PPO)** through **Unity ML-Agents**. Rick learns escape behavior; Negan learns simulated combat. Agents learn through observations, actions, and rewards, with training signals recorded in **TensorBoard**. Two policies. Separate objectives. A shared world that pushes back.
 
 Sentinel Command brings the records into view. Athena, Chief Intelligence Officer, gives the fictional organization its executive presence. Her mandate: challenge assumptions, examine evidence, and ask the question everyone else missed.
 
