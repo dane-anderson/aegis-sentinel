@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
-from export_research import export_episodes, group_episodes, clean_episode, build_snapshot
+from export_research import export_episodes, export_runs, group_episodes, clean_episode, build_snapshot, fact_catalog
 from athena_brief import generate_brief
 
 class EvidenceTests(unittest.TestCase):
@@ -57,5 +57,61 @@ class EvidenceTests(unittest.TestCase):
             brief=generate_brief(snapshot)
         self.assertEqual(brief['findings'],facts)
         self.assertEqual(brief['sourceSnapshotHash'],snapshot['snapshotHash'])
+
+    def write_run(self, root, name, policy):
+        import yaml
+        folder = Path(root, name)
+        folder.mkdir()
+        settings = {'trainer_type':'ppo', 'max_steps':1000, 'network_settings':{'hidden_units':128, 'num_layers':2}}
+        (folder/'configuration.yaml').write_text(yaml.safe_dump({'behaviors':{policy:settings}}))
+        return folder
+
+    def test_discovers_earlier_and_future_runs_without_checkpoints(self):
+        with tempfile.TemporaryDirectory() as root:
+            for name, policy in [('rick_yard_v5','My Behavior'), ('prison-duo-v3','RickEscape'), ('barn-team-v3','NeganCombat'), ('sentinel-supplies-v1','SentinelScout')]:
+                self.write_run(root, name, policy)
+            self.write_run(root, 'private-experiment', 'My Behavior')
+            Path(root, 'barn-team-pending').mkdir()
+            runs = export_runs([Path(root)])
+        self.assertEqual({r['id'] for r in runs}, {'rick_yard_v5','prison-duo-v3','barn-team-v3','sentinel-supplies-v1'})
+        self.assertTrue(all(r['policies'][0]['checkpointSteps'] is None for r in runs))
+        facts = fact_catalog({'runs':runs, 'cooperation':{'groups':[]}})
+        self.assertTrue(any(f['id']=='run-rick_yard_v5' for f in facts))
+
+    def test_wrong_policy_family_is_rejected(self):
+        with tempfile.TemporaryDirectory() as root:
+            self.write_run(root, 'barn-team-v3', 'SentinelRick')
+            with self.assertRaises(ValueError): export_runs([Path(root)])
+
+    def test_duplicate_run_ids_are_rejected(self):
+        with tempfile.TemporaryDirectory() as first, tempfile.TemporaryDirectory() as second:
+            for root in (first, second): self.write_run(root, 'rick_v2', 'My Behavior')
+            with self.assertRaises(ValueError): export_runs([Path(first), Path(second)])
+
+    def test_athena_receives_and_must_reference_days_gone_quiet(self):
+        from io import BytesIO
+        facts=[{'id':key,'text':key} for key in ['training-outcomes','evidence-boundary','run-barn-team-v3']]
+        snapshot={'snapshotHash':'a'*64,'facts':facts,'runs':[{'id':'barn-team-v3','kind':'training','policies':[{'name':'RickEscape','points':[]}]}]}
+        result={'done':True,'response':json.dumps({'evidenceIds':[f['id'] for f in facts],'historyEvidenceId':'run-barn-team-v3','nextExperiment':'train_roles'})}
+        with patch('urllib.request.urlopen',return_value=BytesIO(json.dumps(result).encode())) as call:
+            brief=generate_brief(snapshot)
+        body=json.loads(call.call_args.args[0].data)
+        self.assertEqual(json.loads(body['prompt'])['runContext'][0]['id'], 'barn-team-v3')
+        self.assertEqual(brief['findings'], facts)
+        snapshot['facts'].append({'id':'evaluation-outcomes','text':'No evaluation'})
+        result['response']=json.dumps({'evidenceIds':['training-outcomes','evidence-boundary','evaluation-outcomes'],'nextExperiment':'train_roles'})
+        with patch('urllib.request.urlopen',return_value=BytesIO(json.dumps(result).encode())):
+            with self.assertRaises(ValueError): generate_brief(snapshot)
+
+    def test_required_context_survives_model_prioritization(self):
+        from io import BytesIO
+        extras = ['evaluation-outcomes', 'scripted_demo-outcomes', 'research-coverage']
+        facts = [{'id':key,'text':key} for key in extras + ['training-outcomes','evidence-boundary','run-rick_v2']]
+        snapshot = {'snapshotHash':'a'*64,'facts':facts}
+        result = {'done':True,'response':json.dumps({'evidenceIds':extras,'historyEvidenceId':'run-rick_v2','nextExperiment':'evaluate_frozen'})}
+        with patch('urllib.request.urlopen',return_value=BytesIO(json.dumps(result).encode())):
+            brief = generate_brief(snapshot)
+        self.assertEqual(len(brief['findings']), 6)
+        self.assertTrue({'training-outcomes','evidence-boundary','run-rick_v2'}.issubset({f['id'] for f in brief['findings']}))
 
 if __name__=='__main__':unittest.main()

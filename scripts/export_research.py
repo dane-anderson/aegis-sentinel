@@ -10,8 +10,12 @@ from pathlib import Path
 import yaml
 from tensorboard.backend.event_processing.event_accumulator import EventAccumulator
 
-LEGACY_RUNS = {'prison-duo-v2', 'barn-team-v2', 'prison-duo-v1'}
-POLICIES = {'RickEscape', 'NeganCombat', 'SentinelRick', 'SentinelNegan', 'SentinelScout'}
+RUN_FAMILIES = (
+    (r'sentinel-[A-Za-z0-9_-]{1,70}', {'SentinelRick', 'SentinelNegan', 'SentinelScout'}, 'Sentinel cooperation'),
+    (r'prison-duo-[A-Za-z0-9_-]{1,60}', {'RickEscape', 'NeganCombat'}, 'Prison yard'),
+    (r'barn-team-[A-Za-z0-9_-]{1,60}', {'RickEscape', 'NeganCombat'}, 'Barn encounter'),
+    (r'rick_[A-Za-z0-9_-]{1,70}', {'My Behavior'}, 'Early Rick survival experiments'),
+)
 MODES = {'training', 'evaluation', 'scripted_demo', 'validation', 'untrained_or_mixed'}
 TAG = 'Environment/Cumulative Reward'
 EPISODE_KEYS = ('sessionId episodeId runId timestamp mode outcome environmentFingerprint scene condition round seed blockedRoute safeRoute randomized routeReported routeReached guardianCleared allSurvived durationSeconds reportAt routeAt guardianAt maxSeconds walkerSpeed walkerHealth walkerCount').split()
@@ -32,6 +36,9 @@ def date(timestamp):
 def finite(x):
     return isinstance(x, (int, float)) and not isinstance(x, bool) and math.isfinite(x)
 
+def run_family(name):
+    return next(((policies, label) for pattern, policies, label in RUN_FAMILIES if re.fullmatch(pattern, name)), None)
+
 def scalars(folder, tag):
     if not folder.exists():
         return []
@@ -48,7 +55,8 @@ def export_runs(roots):
         if not root.is_dir():
             raise ValueError('A configured results folder is unavailable; preserving published data.')
         for folder in sorted(root.iterdir()):
-            if not folder.is_dir() or not (folder.name in LEGACY_RUNS or re.fullmatch(r'sentinel-[A-Za-z0-9_-]{1,70}', folder.name)):
+            family = run_family(folder.name)
+            if not folder.is_dir() or family is None:
                 continue
             if folder.name in seen:
                 raise ValueError('Duplicate run ID across source folders: ' + folder.name)
@@ -57,7 +65,8 @@ def export_runs(roots):
                 continue  # Trainer has not initialized this run yet.
             config = yaml.safe_load(config_file.read_text())
             behaviors = config.get('behaviors', {})
-            if not set(behaviors).issubset(POLICIES) or not behaviors:
+            allowed_policies, environment = family
+            if not set(behaviors).issubset(allowed_policies) or not behaviors:
                 raise ValueError('Unexpected policy in ' + folder.name)
             seen.add(folder.name)
             status_file = folder / 'run_logs/training_status.json'
@@ -73,8 +82,7 @@ def export_runs(roots):
                 policies.append({'name': behavior, 'algorithm': settings['trainer_type'].upper(), 'targetSteps': settings['max_steps'], 'checkpointSteps': final.get('steps'), 'checkpointReward': final.get('reward'), 'checkpointAt': date(final.get('creation_time')), 'modelExportPresent': model.is_file(), 'modelHash': digest(model) if model.exists() else None, 'points': points, 'network': {'hiddenUnits': settings['network_settings']['hidden_units'], 'layers': settings['network_settings']['num_layers']}})
                 for i, event_file in enumerate(sorted((folder / behavior).glob('events.out.tfevents.*')), 1):
                     sources.append({'path': f'{folder.name}/{behavior}/TensorBoard event file {i}', 'sha256': digest(event_file)})
-            sentinel = folder.name.startswith('sentinel-')
-            runs.append({'id': folder.name, 'kind': 'smoke_test' if 'smoke' in folder.name else 'training', 'environment': 'Sentinel cooperation' if sentinel else 'Barn encounter' if folder.name.startswith('barn') else 'Prison yard', 'environmentEvidence': 'Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.', 'policies': policies, 'sources': sources})
+            runs.append({'id': folder.name, 'kind': 'smoke_test' if 'smoke' in folder.name else 'training', 'environment': environment, 'environmentEvidence': 'Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.', 'policies': policies, 'sources': sources})
     return sorted(runs, key=lambda r: (not r['id'].startswith('sentinel-'), r['id']))
 
 def clean_episode(record):
@@ -151,6 +159,8 @@ def fact_catalog(snapshot):
     facts = []
     def add(identifier, text):
         facts.append({'id': identifier, 'text': text})
+    sample_count = sum(len(p['points']) for r in snapshot['runs'] for p in r['policies'])
+    add('research-coverage', f"Days Gone Quiet research feed: {len(snapshot['runs'])} configured runs and {sample_count} recorded reward samples. Early Rick, prison, barn and Sentinel run families are discovered automatically; folders without a saved configuration are deferred. Reward scales differ between tasks and are not a shared capability score.")
     for mode in ('training', 'evaluation', 'scripted_demo'):
         groups = [g for g in snapshot['cooperation']['groups'] if g['mode'] == mode]
         n = sum(g['completed'] for g in groups)
@@ -161,9 +171,8 @@ def fact_catalog(snapshot):
             total = sum(g[key] for g in groups)
             add(mode + '-' + key, f'{label}: {label2} in {total} of {n} completed episodes.')
     for r in snapshot['runs']:
-        if r['id'].startswith('sentinel-'):
-            details = '; '.join(f"{p['name']}: {p['checkpointSteps'] if p['checkpointSteps'] is not None else 'no saved'} checkpoint steps" for p in r['policies'])
-            add('run-' + r['id'], r['id'] + ' (' + r['kind'].replace('_',' ') + '). ' + details + '. Training reward is not mission success.')
+        details = '; '.join(f"{p['name']}: {p['checkpointSteps'] if p['checkpointSteps'] is not None else 'no saved'} checkpoint steps / {p['targetSteps']} configured target, {len(p['points'])} reward samples" for p in r['policies'])
+        add('run-' + r['id'], r['id'] + ' (' + r['kind'].replace('_',' ') + '). ' + details + '. Training reward is not mission success; reaching the step target is not proof of mastery.')
     add('evidence-boundary', 'Scripted demonstrations and mechanics validation do not establish learned cooperation. Completing the mission requires all three roles by design; no matched baseline has yet measured a causal improvement from cooperation.')
     return facts
 

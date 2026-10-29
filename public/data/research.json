@@ -9,7 +9,7 @@
       "id": "sentinel-connection-smoke-v1",
       "kind": "smoke_test",
       "environment": "Sentinel cooperation",
-      "environmentEvidence": "Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
+      "environmentEvidence": "Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
       "policies": [
         {
           "name": "SentinelRick",
@@ -117,7 +117,7 @@
       "id": "sentinel-smoke-v1",
       "kind": "smoke_test",
       "environment": "Sentinel cooperation",
-      "environmentEvidence": "Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
+      "environmentEvidence": "Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
       "policies": [
         {
           "name": "SentinelRick",
@@ -225,7 +225,7 @@
       "id": "barn-team-v2",
       "kind": "training",
       "environment": "Barn encounter",
-      "environmentEvidence": "Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
+      "environmentEvidence": "Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
       "policies": [
         {
           "name": "RickEscape",
@@ -323,7 +323,7 @@
       "id": "prison-duo-v1",
       "kind": "training",
       "environment": "Prison yard",
-      "environmentEvidence": "Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
+      "environmentEvidence": "Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
       "policies": [
         {
           "name": "RickEscape",
@@ -2869,7 +2869,7 @@
       "id": "prison-duo-v2",
       "kind": "training",
       "environment": "Prison yard",
-      "environmentEvidence": "Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
+      "environmentEvidence": "Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
       "policies": [
         {
           "name": "RickEscape",
@@ -5092,10 +5092,755 @@
           "sha256": "190bf43b25cba13682c8832f5a3f2a468b11d65d01cfbdbaaba679d02b03b057"
         }
       ]
+    },
+    {
+      "id": "rick_lab_smoke",
+      "kind": "smoke_test",
+      "environment": "Early Rick survival experiments",
+      "environmentEvidence": "Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
+      "policies": [
+        {
+          "name": "My Behavior",
+          "algorithm": "PPO",
+          "targetSteps": 200000,
+          "checkpointSteps": 12170,
+          "checkpointReward": -0.8280909223990007,
+          "checkpointAt": "2026-09-21T01:40:18.149231+00:00",
+          "modelExportPresent": true,
+          "modelHash": "a1262eef1ba08e3a99f93741448afe754884293925f00adfda027c1e26a32185",
+          "points": [
+            {
+              "step": 5000,
+              "value": -0.8180370330810547,
+              "recordedAt": "2026-09-21T01:39:59.658797+00:00"
+            },
+            {
+              "step": 10000,
+              "value": -0.7910000085830688,
+              "recordedAt": "2026-09-21T01:40:06.260010+00:00"
+            }
+          ],
+          "network": {
+            "hiddenUnits": 128,
+            "layers": 2
+          }
+        }
+      ],
+      "sources": [
+        {
+          "path": "rick_lab_smoke/configuration.yaml",
+          "sha256": "2beb116111c3cee7b1cdb372d2d7e059aa73b230401ec21d8d0596550c39a665"
+        },
+        {
+          "path": "rick_lab_smoke/run_logs/training_status.json",
+          "sha256": "154dd346c70607f952e705902db7ba811ecb5486db9b991f9d35bc1a56e0ee94"
+        },
+        {
+          "path": "rick_lab_smoke/My Behavior/TensorBoard event file 1",
+          "sha256": "0bbe7528cb5d277149884fd71e86d0b3e5075c78824ff198056aa4be5a933dd8"
+        }
+      ]
+    },
+    {
+      "id": "rick_v1",
+      "kind": "training",
+      "environment": "Early Rick survival experiments",
+      "environmentEvidence": "Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
+      "policies": [
+        {
+          "name": "My Behavior",
+          "algorithm": "PPO",
+          "targetSteps": 200000,
+          "checkpointSteps": null,
+          "checkpointReward": null,
+          "checkpointAt": null,
+          "modelExportPresent": false,
+          "modelHash": null,
+          "points": [
+            {
+              "step": 10000,
+              "value": -0.8463333249092102,
+              "recordedAt": "2026-09-19T01:35:34.055984+00:00"
+            },
+            {
+              "step": 20000,
+              "value": 1.1172223091125488,
+              "recordedAt": "2026-09-19T01:36:50.115035+00:00"
+            }
+          ],
+          "network": {
+            "hiddenUnits": 128,
+            "layers": 2
+          }
+        }
+      ],
+      "sources": [
+        {
+          "path": "rick_v1/configuration.yaml",
+          "sha256": "1b97f261ab3f783e97330c4c13aacffc23eeb0d8cf66e6eee0b0b696e8ab0636"
+        },
+        {
+          "path": "rick_v1/run_logs/training_status.json",
+          "sha256": "0165fa6d7d7dca125bde30d774f5ebf69c495f12ecdc4714e8587e9ae5c43679"
+        },
+        {
+          "path": "rick_v1/My Behavior/TensorBoard event file 1",
+          "sha256": "6b3369f53cd2ff3ca13038b971dee769439c3ecc4671a8c634dc8f881e2ded25"
+        }
+      ]
+    },
+    {
+      "id": "rick_v2",
+      "kind": "training",
+      "environment": "Early Rick survival experiments",
+      "environmentEvidence": "Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
+      "policies": [
+        {
+          "name": "My Behavior",
+          "algorithm": "PPO",
+          "targetSteps": 200000,
+          "checkpointSteps": 68207,
+          "checkpointReward": -0.4479999840259552,
+          "checkpointAt": "2026-09-21T01:15:53.434795+00:00",
+          "modelExportPresent": true,
+          "modelHash": "a91b01c9718cb961206811e35b2656abf99b72364e2da025b66afafb5e8cb348",
+          "points": [
+            {
+              "step": 10000,
+              "value": -0.8494848608970642,
+              "recordedAt": "2026-09-21T01:12:05.342893+00:00"
+            },
+            {
+              "step": 20000,
+              "value": -0.8027451038360596,
+              "recordedAt": "2026-09-21T01:12:18.305591+00:00"
+            },
+            {
+              "step": 30000,
+              "value": -0.7911304235458374,
+              "recordedAt": "2026-09-21T01:12:31.224572+00:00"
+            },
+            {
+              "step": 40000,
+              "value": -0.5794582962989807,
+              "recordedAt": "2026-09-21T01:12:44.011333+00:00"
+            },
+            {
+              "step": 50000,
+              "value": -0.4396499991416931,
+              "recordedAt": "2026-09-21T01:12:56.823611+00:00"
+            },
+            {
+              "step": 60000,
+              "value": -0.5929230451583862,
+              "recordedAt": "2026-09-21T01:15:42.746879+00:00"
+            }
+          ],
+          "network": {
+            "hiddenUnits": 128,
+            "layers": 2
+          }
+        }
+      ],
+      "sources": [
+        {
+          "path": "rick_v2/configuration.yaml",
+          "sha256": "d782342eeabeb9de985894f7b925f5f970c58f4978bf87e910fdbe545e21b5c0"
+        },
+        {
+          "path": "rick_v2/run_logs/training_status.json",
+          "sha256": "af42a205d06ce236875b3deaf908d861894ab1e534a5dc305bbd686058a2df6e"
+        },
+        {
+          "path": "rick_v2/My Behavior/TensorBoard event file 1",
+          "sha256": "802c4d9e97c508e6c05ba26a553dbf316b322aae0f01d333ddcee680997fa14d"
+        },
+        {
+          "path": "rick_v2/My Behavior/TensorBoard event file 2",
+          "sha256": "b28ba6f764e7362965e7eebfc89aa0a2d4f90099e74a1898b551cd126507e690"
+        }
+      ]
+    },
+    {
+      "id": "rick_yard_v2",
+      "kind": "training",
+      "environment": "Early Rick survival experiments",
+      "environmentEvidence": "Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
+      "policies": [
+        {
+          "name": "My Behavior",
+          "algorithm": "PPO",
+          "targetSteps": 200000,
+          "checkpointSteps": 24112,
+          "checkpointReward": -0.8358888932400279,
+          "checkpointAt": "2026-09-21T02:39:01.412427+00:00",
+          "modelExportPresent": true,
+          "modelHash": "91c95af0940adbfbfd3a5a42dd6a519d08511579751b1b120a3b3e0279417227",
+          "points": [
+            {
+              "step": 5000,
+              "value": -0.8594000339508057,
+              "recordedAt": "2026-09-21T02:37:56.228085+00:00"
+            },
+            {
+              "step": 10000,
+              "value": -0.8692631721496582,
+              "recordedAt": "2026-09-21T02:38:02.858779+00:00"
+            },
+            {
+              "step": 15000,
+              "value": -0.847000002861023,
+              "recordedAt": "2026-09-21T02:38:09.643437+00:00"
+            },
+            {
+              "step": 20000,
+              "value": -0.8529706001281738,
+              "recordedAt": "2026-09-21T02:38:16.237115+00:00"
+            }
+          ],
+          "network": {
+            "hiddenUnits": 128,
+            "layers": 2
+          }
+        }
+      ],
+      "sources": [
+        {
+          "path": "rick_yard_v2/configuration.yaml",
+          "sha256": "4edacdb9a40ba970cffd547ea9d0ecf4deb458d9b0c6b7c06a465e24e3eb82f7"
+        },
+        {
+          "path": "rick_yard_v2/run_logs/training_status.json",
+          "sha256": "ac5ffbd5e4a49ed981cc618c2b3aa00ddb866431a263a5cf172353e866da015b"
+        },
+        {
+          "path": "rick_yard_v2/My Behavior/TensorBoard event file 1",
+          "sha256": "abd2e2435168faf0b1e0d9f44c2309f397537c87db6f6c5dca302b4f8de61493"
+        }
+      ]
+    },
+    {
+      "id": "rick_yard_v4",
+      "kind": "training",
+      "environment": "Early Rick survival experiments",
+      "environmentEvidence": "Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
+      "policies": [
+        {
+          "name": "My Behavior",
+          "algorithm": "PPO",
+          "targetSteps": 200000,
+          "checkpointSteps": 200058,
+          "checkpointReward": -0.5349999591708183,
+          "checkpointAt": "2026-09-25T22:22:38.844366+00:00",
+          "modelExportPresent": true,
+          "modelHash": "7290e4853a55c9e9706303276b8b72d62b5c80ef745548b873fb5f9d6c8e2971",
+          "points": [
+            {
+              "step": 5000,
+              "value": -0.846500039100647,
+              "recordedAt": "2026-09-25T22:18:28.262352+00:00"
+            },
+            {
+              "step": 10000,
+              "value": -0.8488484621047974,
+              "recordedAt": "2026-09-25T22:18:34.219026+00:00"
+            },
+            {
+              "step": 15000,
+              "value": -0.8512424230575562,
+              "recordedAt": "2026-09-25T22:18:40.299388+00:00"
+            },
+            {
+              "step": 20000,
+              "value": -0.8163214325904846,
+              "recordedAt": "2026-09-25T22:18:46.308235+00:00"
+            },
+            {
+              "step": 25000,
+              "value": -0.803826093673706,
+              "recordedAt": "2026-09-25T22:18:52.456293+00:00"
+            },
+            {
+              "step": 30000,
+              "value": -0.695277750492096,
+              "recordedAt": "2026-09-25T22:18:58.482177+00:00"
+            },
+            {
+              "step": 35000,
+              "value": -0.7511052489280701,
+              "recordedAt": "2026-09-25T22:19:04.489991+00:00"
+            },
+            {
+              "step": 40000,
+              "value": -0.6972941160202026,
+              "recordedAt": "2026-09-25T22:19:10.622310+00:00"
+            },
+            {
+              "step": 45000,
+              "value": -0.4906153678894043,
+              "recordedAt": "2026-09-25T22:19:16.639747+00:00"
+            },
+            {
+              "step": 50000,
+              "value": -0.5773333311080933,
+              "recordedAt": "2026-09-25T22:19:22.771144+00:00"
+            },
+            {
+              "step": 55000,
+              "value": -0.4439999759197235,
+              "recordedAt": "2026-09-25T22:19:28.845627+00:00"
+            },
+            {
+              "step": 60000,
+              "value": -0.7713181972503662,
+              "recordedAt": "2026-09-25T22:19:34.818776+00:00"
+            },
+            {
+              "step": 65000,
+              "value": -0.36927270889282227,
+              "recordedAt": "2026-09-25T22:19:40.945042+00:00"
+            },
+            {
+              "step": 70000,
+              "value": -0.5671428442001343,
+              "recordedAt": "2026-09-25T22:19:46.961147+00:00"
+            },
+            {
+              "step": 75000,
+              "value": -0.3731110990047455,
+              "recordedAt": "2026-09-25T22:19:53.101257+00:00"
+            },
+            {
+              "step": 80000,
+              "value": -0.5410909056663513,
+              "recordedAt": "2026-09-25T22:19:59.100878+00:00"
+            },
+            {
+              "step": 85000,
+              "value": -0.6534285545349121,
+              "recordedAt": "2026-09-25T22:20:05.143395+00:00"
+            },
+            {
+              "step": 90000,
+              "value": -0.5607500076293945,
+              "recordedAt": "2026-09-25T22:20:11.326852+00:00"
+            },
+            {
+              "step": 95000,
+              "value": -0.6072499752044678,
+              "recordedAt": "2026-09-25T22:20:17.309220+00:00"
+            },
+            {
+              "step": 100000,
+              "value": -0.5620833039283752,
+              "recordedAt": "2026-09-25T22:20:23.459389+00:00"
+            },
+            {
+              "step": 105000,
+              "value": -0.5664545297622681,
+              "recordedAt": "2026-09-25T22:20:29.438395+00:00"
+            },
+            {
+              "step": 110000,
+              "value": -0.4729999899864197,
+              "recordedAt": "2026-09-25T22:20:35.453673+00:00"
+            },
+            {
+              "step": 115000,
+              "value": -0.41588887572288513,
+              "recordedAt": "2026-09-25T22:20:41.584850+00:00"
+            },
+            {
+              "step": 120000,
+              "value": -0.5091000199317932,
+              "recordedAt": "2026-09-25T22:20:47.622687+00:00"
+            },
+            {
+              "step": 125000,
+              "value": -0.4919999837875366,
+              "recordedAt": "2026-09-25T22:20:53.763852+00:00"
+            },
+            {
+              "step": 130000,
+              "value": -0.5201817750930786,
+              "recordedAt": "2026-09-25T22:20:59.858757+00:00"
+            },
+            {
+              "step": 135000,
+              "value": -0.5377272367477417,
+              "recordedAt": "2026-09-25T22:21:05.958320+00:00"
+            },
+            {
+              "step": 140000,
+              "value": -0.5274999737739563,
+              "recordedAt": "2026-09-25T22:21:11.890867+00:00"
+            },
+            {
+              "step": 145000,
+              "value": -0.4950999915599823,
+              "recordedAt": "2026-09-25T22:21:32.209800+00:00"
+            },
+            {
+              "step": 150000,
+              "value": -0.4301110804080963,
+              "recordedAt": "2026-09-25T22:21:38.367732+00:00"
+            },
+            {
+              "step": 155000,
+              "value": -0.5570908784866333,
+              "recordedAt": "2026-09-25T22:21:44.330852+00:00"
+            },
+            {
+              "step": 160000,
+              "value": -0.5728181600570679,
+              "recordedAt": "2026-09-25T22:21:50.490645+00:00"
+            },
+            {
+              "step": 165000,
+              "value": -0.5826666355133057,
+              "recordedAt": "2026-09-25T22:21:56.436565+00:00"
+            },
+            {
+              "step": 170000,
+              "value": -0.5601666569709778,
+              "recordedAt": "2026-09-25T22:22:02.423634+00:00"
+            },
+            {
+              "step": 175000,
+              "value": -0.43111106753349304,
+              "recordedAt": "2026-09-25T22:22:08.548637+00:00"
+            },
+            {
+              "step": 180000,
+              "value": -0.3921249806880951,
+              "recordedAt": "2026-09-25T22:22:14.504646+00:00"
+            },
+            {
+              "step": 185000,
+              "value": -0.5744545459747314,
+              "recordedAt": "2026-09-25T22:22:20.673709+00:00"
+            },
+            {
+              "step": 190000,
+              "value": -0.5517500042915344,
+              "recordedAt": "2026-09-25T22:22:26.701936+00:00"
+            },
+            {
+              "step": 195000,
+              "value": -0.46622219681739807,
+              "recordedAt": "2026-09-25T22:22:32.698265+00:00"
+            },
+            {
+              "step": 200000,
+              "value": -0.4877999722957611,
+              "recordedAt": "2026-09-25T22:22:38.810293+00:00"
+            }
+          ],
+          "network": {
+            "hiddenUnits": 128,
+            "layers": 2
+          }
+        }
+      ],
+      "sources": [
+        {
+          "path": "rick_yard_v4/configuration.yaml",
+          "sha256": "61305f1521aac167ced156af7f98b19f158990b7323751d993e7d49cd693dbd5"
+        },
+        {
+          "path": "rick_yard_v4/run_logs/training_status.json",
+          "sha256": "6bf4338f520c374f7b4a7df42806f792c8e8d5da3d949a939ef2e54ec1df6286"
+        },
+        {
+          "path": "rick_yard_v4/My Behavior/TensorBoard event file 1",
+          "sha256": "d90bebe585512da7a36d2cbee4076dc4b76fdbb56f3c2da8ac38ad50b0aefc25"
+        }
+      ]
+    },
+    {
+      "id": "rick_yard_v5",
+      "kind": "training",
+      "environment": "Early Rick survival experiments",
+      "environmentEvidence": "Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.",
+      "policies": [
+        {
+          "name": "My Behavior",
+          "algorithm": "PPO",
+          "targetSteps": 200000,
+          "checkpointSteps": 200015,
+          "checkpointReward": -0.47599995136260986,
+          "checkpointAt": "2026-09-25T23:12:51.362299+00:00",
+          "modelExportPresent": true,
+          "modelHash": "8478cfafb9ba24450e0ecf0c1c3cccc2876d4d5820064de973c0eebf4770f4c0",
+          "points": [
+            {
+              "step": 5000,
+              "value": -0.8437419533729553,
+              "recordedAt": "2026-09-25T23:07:14.795470+00:00"
+            },
+            {
+              "step": 10000,
+              "value": -0.8457878828048706,
+              "recordedAt": "2026-09-25T23:07:20.808163+00:00"
+            },
+            {
+              "step": 15000,
+              "value": -0.6669999957084656,
+              "recordedAt": "2026-09-25T23:07:26.899992+00:00"
+            },
+            {
+              "step": 20000,
+              "value": -0.7265294194221497,
+              "recordedAt": "2026-09-25T23:07:32.860996+00:00"
+            },
+            {
+              "step": 25000,
+              "value": -0.6868235468864441,
+              "recordedAt": "2026-09-25T23:08:04.059943+00:00"
+            },
+            {
+              "step": 30000,
+              "value": -0.5464999675750732,
+              "recordedAt": "2026-09-25T23:08:10.238409+00:00"
+            },
+            {
+              "step": 35000,
+              "value": -0.5744166374206543,
+              "recordedAt": "2026-09-25T23:08:17.441561+00:00"
+            },
+            {
+              "step": 40000,
+              "value": -0.5945384502410889,
+              "recordedAt": "2026-09-25T23:08:25.011635+00:00"
+            },
+            {
+              "step": 45000,
+              "value": -0.6069999933242798,
+              "recordedAt": "2026-09-25T23:08:31.005142+00:00"
+            },
+            {
+              "step": 50000,
+              "value": -0.522599995136261,
+              "recordedAt": "2026-09-25T23:08:37.098661+00:00"
+            },
+            {
+              "step": 55000,
+              "value": -0.5099999904632568,
+              "recordedAt": "2026-09-25T23:08:43.131816+00:00"
+            },
+            {
+              "step": 60000,
+              "value": -0.5706666707992554,
+              "recordedAt": "2026-09-25T23:08:49.020264+00:00"
+            },
+            {
+              "step": 65000,
+              "value": -0.5824166536331177,
+              "recordedAt": "2026-09-25T23:08:55.183277+00:00"
+            },
+            {
+              "step": 70000,
+              "value": -0.6574999690055847,
+              "recordedAt": "2026-09-25T23:09:01.143807+00:00"
+            },
+            {
+              "step": 75000,
+              "value": -0.696117639541626,
+              "recordedAt": "2026-09-25T23:09:07.212483+00:00"
+            },
+            {
+              "step": 80000,
+              "value": -0.6058332920074463,
+              "recordedAt": "2026-09-25T23:09:13.183106+00:00"
+            },
+            {
+              "step": 85000,
+              "value": -0.46769997477531433,
+              "recordedAt": "2026-09-25T23:09:19.136023+00:00"
+            },
+            {
+              "step": 90000,
+              "value": -0.5774166584014893,
+              "recordedAt": "2026-09-25T23:09:25.237917+00:00"
+            },
+            {
+              "step": 95000,
+              "value": -0.5592727065086365,
+              "recordedAt": "2026-09-25T23:09:31.113566+00:00"
+            },
+            {
+              "step": 100000,
+              "value": -0.5545454621315002,
+              "recordedAt": "2026-09-25T23:09:37.247890+00:00"
+            },
+            {
+              "step": 105000,
+              "value": -0.5756666660308838,
+              "recordedAt": "2026-09-25T23:09:43.188885+00:00"
+            },
+            {
+              "step": 110000,
+              "value": -0.5400908589363098,
+              "recordedAt": "2026-09-25T23:09:49.198950+00:00"
+            },
+            {
+              "step": 115000,
+              "value": -0.4521110951900482,
+              "recordedAt": "2026-09-25T23:09:55.295904+00:00"
+            },
+            {
+              "step": 120000,
+              "value": -0.5020999908447266,
+              "recordedAt": "2026-09-25T23:10:01.182503+00:00"
+            },
+            {
+              "step": 125000,
+              "value": -0.5364545583724976,
+              "recordedAt": "2026-09-25T23:10:07.272788+00:00"
+            },
+            {
+              "step": 130000,
+              "value": -0.5569090843200684,
+              "recordedAt": "2026-09-25T23:10:48.430881+00:00"
+            },
+            {
+              "step": 135000,
+              "value": -0.6306153535842896,
+              "recordedAt": "2026-09-25T23:10:54.662044+00:00"
+            },
+            {
+              "step": 140000,
+              "value": -0.49689996242523193,
+              "recordedAt": "2026-09-25T23:11:01.714670+00:00"
+            },
+            {
+              "step": 145000,
+              "value": -0.5033000111579895,
+              "recordedAt": "2026-09-25T23:11:07.692888+00:00"
+            },
+            {
+              "step": 150000,
+              "value": -0.48959997296333313,
+              "recordedAt": "2026-09-25T23:11:13.664364+00:00"
+            },
+            {
+              "step": 155000,
+              "value": -0.5269090533256531,
+              "recordedAt": "2026-09-25T23:11:57.128073+00:00"
+            },
+            {
+              "step": 160000,
+              "value": -0.5139999985694885,
+              "recordedAt": "2026-09-25T23:12:03.163533+00:00"
+            },
+            {
+              "step": 165000,
+              "value": -0.54339998960495,
+              "recordedAt": "2026-09-25T23:12:09.253347+00:00"
+            },
+            {
+              "step": 170000,
+              "value": -0.49799999594688416,
+              "recordedAt": "2026-09-25T23:12:15.179673+00:00"
+            },
+            {
+              "step": 175000,
+              "value": -0.5073999762535095,
+              "recordedAt": "2026-09-25T23:12:21.328139+00:00"
+            },
+            {
+              "step": 180000,
+              "value": -0.5381817817687988,
+              "recordedAt": "2026-09-25T23:12:27.300582+00:00"
+            },
+            {
+              "step": 185000,
+              "value": -0.3907499611377716,
+              "recordedAt": "2026-09-25T23:12:33.171918+00:00"
+            },
+            {
+              "step": 190000,
+              "value": -0.5399999618530273,
+              "recordedAt": "2026-09-25T23:12:39.280405+00:00"
+            },
+            {
+              "step": 195000,
+              "value": -0.5080909132957458,
+              "recordedAt": "2026-09-25T23:12:45.276713+00:00"
+            },
+            {
+              "step": 200000,
+              "value": -0.46211108565330505,
+              "recordedAt": "2026-09-25T23:12:51.324839+00:00"
+            }
+          ],
+          "network": {
+            "hiddenUnits": 128,
+            "layers": 2
+          }
+        }
+      ],
+      "sources": [
+        {
+          "path": "rick_yard_v5/configuration.yaml",
+          "sha256": "130178c43a214069a431bd5159dcd196fd740f61ddde3c6cd1fab42530253e61"
+        },
+        {
+          "path": "rick_yard_v5/run_logs/training_status.json",
+          "sha256": "eb4d985e8e191636a07893ad183756c353e2cae6532c03135570b3f29d86b928"
+        },
+        {
+          "path": "rick_yard_v5/My Behavior/TensorBoard event file 1",
+          "sha256": "a1228efa157dfcf80a9217e1d7aed993299fe432a9fa198002b87db2ab0b6f16"
+        }
+      ]
     }
   ],
   "cooperation": {
     "groups": [
+      {
+        "id": "a41bbc611155f64d",
+        "mode": "validation",
+        "runId": "unlinked",
+        "environmentFingerprint": "cbadd37d5caa4ad0d8bd8b21fe1df13acdc8693ba765a5fd6b9bc8aeb0756076",
+        "completed": 0,
+        "interrupted": 1,
+        "successes": 0,
+        "routeReported": 0,
+        "routeReached": 0,
+        "guardianCleared": 0,
+        "allSurvived": 0,
+        "meanSeconds": null,
+        "lastAt": "2026-10-29T13:17:01.8432430+00:00",
+        "episodeIds": [
+          "99e770f5683c4a2da64a9d7d3e6306d8-9"
+        ]
+      },
+      {
+        "id": "bdf2642c8bd348d0",
+        "mode": "validation",
+        "runId": "unlinked",
+        "environmentFingerprint": "cbadd37d5caa4ad0d8bd8b21fe1df13acdc8693ba765a5fd6b9bc8aeb0756076",
+        "completed": 4,
+        "interrupted": 4,
+        "successes": 3,
+        "routeReported": 3,
+        "routeReached": 3,
+        "guardianCleared": 3,
+        "allSurvived": 3,
+        "meanSeconds": 4.1449995040893555,
+        "lastAt": "2026-10-29T13:17:01.7949460+00:00",
+        "episodeIds": [
+          "99e770f5683c4a2da64a9d7d3e6306d8-1",
+          "99e770f5683c4a2da64a9d7d3e6306d8-2",
+          "99e770f5683c4a2da64a9d7d3e6306d8-3",
+          "99e770f5683c4a2da64a9d7d3e6306d8-4",
+          "99e770f5683c4a2da64a9d7d3e6306d8-5",
+          "99e770f5683c4a2da64a9d7d3e6306d8-6",
+          "99e770f5683c4a2da64a9d7d3e6306d8-7",
+          "99e770f5683c4a2da64a9d7d3e6306d8-8"
+        ]
+      },
       {
         "id": "71444838c6fa7ceb",
         "mode": "training",
@@ -6701,6 +7446,573 @@
             "alive": true
           }
         ]
+      },
+      {
+        "sessionId": "99e770f5683c4a2da64a9d7d3e6306d8",
+        "episodeId": "99e770f5683c4a2da64a9d7d3e6306d8-1",
+        "runId": "unlinked",
+        "timestamp": "2026-10-29T13:16:58.4711490+00:00",
+        "mode": "validation",
+        "outcome": "interrupted",
+        "environmentFingerprint": "cbadd37d5caa4ad0d8bd8b21fe1df13acdc8693ba765a5fd6b9bc8aeb0756076",
+        "scene": "SentinelCooperation",
+        "condition": "full_team",
+        "round": 1,
+        "seed": 1440,
+        "blockedRoute": 0,
+        "safeRoute": -1,
+        "randomized": false,
+        "routeReported": false,
+        "routeReached": false,
+        "guardianCleared": false,
+        "allSurvived": true,
+        "durationSeconds": 0.0,
+        "reportAt": -1.0,
+        "routeAt": -1.0,
+        "guardianAt": -1.0,
+        "maxSeconds": 90.0,
+        "walkerSpeed": 1.149999976158142,
+        "walkerHealth": 60.0,
+        "walkerCount": 1,
+        "agents": [
+          {
+            "role": "Rick",
+            "policy": "SentinelRick",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": 0.0,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Negan",
+            "policy": "SentinelNegan",
+            "modelHash": "none",
+            "health": 140.0,
+            "maximumHealth": 140.0,
+            "reward": 0.0,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Scout",
+            "policy": "SentinelScout",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": 0.0,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "sessionId": "99e770f5683c4a2da64a9d7d3e6306d8",
+        "episodeId": "99e770f5683c4a2da64a9d7d3e6306d8-2",
+        "runId": "unlinked",
+        "timestamp": "2026-10-29T13:16:58.4720700+00:00",
+        "mode": "validation",
+        "outcome": "success",
+        "environmentFingerprint": "cbadd37d5caa4ad0d8bd8b21fe1df13acdc8693ba765a5fd6b9bc8aeb0756076",
+        "scene": "SentinelCooperation",
+        "condition": "full_team",
+        "round": 2,
+        "seed": 1440,
+        "blockedRoute": 0,
+        "safeRoute": 1,
+        "randomized": false,
+        "routeReported": true,
+        "routeReached": true,
+        "guardianCleared": true,
+        "allSurvived": true,
+        "durationSeconds": 0.0,
+        "reportAt": 0.0,
+        "routeAt": -1.0,
+        "guardianAt": -1.0,
+        "maxSeconds": 90.0,
+        "walkerSpeed": 1.149999976158142,
+        "walkerHealth": 60.0,
+        "walkerCount": 1,
+        "agents": [
+          {
+            "role": "Rick",
+            "policy": "SentinelRick",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": 2.299999952316284,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Negan",
+            "policy": "SentinelNegan",
+            "modelHash": "none",
+            "health": 140.0,
+            "maximumHealth": 140.0,
+            "reward": 2.299999952316284,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Scout",
+            "policy": "SentinelScout",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": 2.299999952316284,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "sessionId": "99e770f5683c4a2da64a9d7d3e6306d8",
+        "episodeId": "99e770f5683c4a2da64a9d7d3e6306d8-3",
+        "runId": "unlinked",
+        "timestamp": "2026-10-29T13:16:58.4723240+00:00",
+        "mode": "validation",
+        "outcome": "interrupted",
+        "environmentFingerprint": "cbadd37d5caa4ad0d8bd8b21fe1df13acdc8693ba765a5fd6b9bc8aeb0756076",
+        "scene": "SentinelCooperation",
+        "condition": "full_team",
+        "round": 3,
+        "seed": 1440,
+        "blockedRoute": 0,
+        "safeRoute": -1,
+        "randomized": false,
+        "routeReported": false,
+        "routeReached": false,
+        "guardianCleared": false,
+        "allSurvived": true,
+        "durationSeconds": 0.0,
+        "reportAt": -1.0,
+        "routeAt": -1.0,
+        "guardianAt": -1.0,
+        "maxSeconds": 90.0,
+        "walkerSpeed": 1.149999976158142,
+        "walkerHealth": 60.0,
+        "walkerCount": 1,
+        "agents": [
+          {
+            "role": "Rick",
+            "policy": "SentinelRick",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": 2.299999952316284,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Negan",
+            "policy": "SentinelNegan",
+            "modelHash": "none",
+            "health": 140.0,
+            "maximumHealth": 140.0,
+            "reward": 2.299999952316284,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Scout",
+            "policy": "SentinelScout",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": 2.299999952316284,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "sessionId": "99e770f5683c4a2da64a9d7d3e6306d8",
+        "episodeId": "99e770f5683c4a2da64a9d7d3e6306d8-4",
+        "runId": "unlinked",
+        "timestamp": "2026-10-29T13:17:00.1371790+00:00",
+        "mode": "validation",
+        "outcome": "success",
+        "environmentFingerprint": "cbadd37d5caa4ad0d8bd8b21fe1df13acdc8693ba765a5fd6b9bc8aeb0756076",
+        "scene": "SentinelCooperation",
+        "condition": "full_team",
+        "round": 4,
+        "seed": 1440,
+        "blockedRoute": 0,
+        "safeRoute": 1,
+        "randomized": false,
+        "routeReported": true,
+        "routeReached": true,
+        "guardianCleared": true,
+        "allSurvived": true,
+        "durationSeconds": 8.380001068115234,
+        "reportAt": 0.9999992251396179,
+        "routeAt": 5.299995422363281,
+        "guardianAt": 2.1599981784820557,
+        "maxSeconds": 90.0,
+        "walkerSpeed": 1.149999976158142,
+        "walkerHealth": 60.0,
+        "walkerCount": 1,
+        "agents": [
+          {
+            "role": "Rick",
+            "policy": "SentinelRick",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": 5.8477888107299805,
+            "distance": 40.04011535644531,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Negan",
+            "policy": "SentinelNegan",
+            "modelHash": "none",
+            "health": 132.0,
+            "maximumHealth": 140.0,
+            "reward": 6.351728916168213,
+            "distance": 23.728084564208984,
+            "kills": 1,
+            "alive": true
+          },
+          {
+            "role": "Scout",
+            "policy": "SentinelScout",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": 5.397137641906738,
+            "distance": 36.630043029785156,
+            "kills": 0,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "sessionId": "99e770f5683c4a2da64a9d7d3e6306d8",
+        "episodeId": "99e770f5683c4a2da64a9d7d3e6306d8-5",
+        "runId": "unlinked",
+        "timestamp": "2026-10-29T13:17:00.1434900+00:00",
+        "mode": "validation",
+        "outcome": "interrupted",
+        "environmentFingerprint": "cbadd37d5caa4ad0d8bd8b21fe1df13acdc8693ba765a5fd6b9bc8aeb0756076",
+        "scene": "SentinelCooperation",
+        "condition": "full_team",
+        "round": 5,
+        "seed": 1440,
+        "blockedRoute": 0,
+        "safeRoute": -1,
+        "randomized": false,
+        "routeReported": false,
+        "routeReached": false,
+        "guardianCleared": false,
+        "allSurvived": true,
+        "durationSeconds": 0.0,
+        "reportAt": -1.0,
+        "routeAt": -1.0,
+        "guardianAt": -1.0,
+        "maxSeconds": 90.0,
+        "walkerSpeed": 1.149999976158142,
+        "walkerHealth": 60.0,
+        "walkerCount": 1,
+        "agents": [
+          {
+            "role": "Rick",
+            "policy": "SentinelRick",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": 0.0,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Negan",
+            "policy": "SentinelNegan",
+            "modelHash": "none",
+            "health": 140.0,
+            "maximumHealth": 140.0,
+            "reward": 0.0,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Scout",
+            "policy": "SentinelScout",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": 0.0,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "sessionId": "99e770f5683c4a2da64a9d7d3e6306d8",
+        "episodeId": "99e770f5683c4a2da64a9d7d3e6306d8-6",
+        "runId": "unlinked",
+        "timestamp": "2026-10-29T13:17:01.7776740+00:00",
+        "mode": "validation",
+        "outcome": "success",
+        "environmentFingerprint": "cbadd37d5caa4ad0d8bd8b21fe1df13acdc8693ba765a5fd6b9bc8aeb0756076",
+        "scene": "SentinelCooperation",
+        "condition": "full_team",
+        "round": 6,
+        "seed": 1440,
+        "blockedRoute": 1,
+        "safeRoute": 0,
+        "randomized": false,
+        "routeReported": true,
+        "routeReached": true,
+        "guardianCleared": true,
+        "allSurvived": true,
+        "durationSeconds": 8.199996948242188,
+        "reportAt": 0.9999992251396179,
+        "routeAt": 5.059995651245117,
+        "guardianAt": 2.1599981784820557,
+        "maxSeconds": 90.0,
+        "walkerSpeed": 1.149999976158142,
+        "walkerHealth": 60.0,
+        "walkerCount": 1,
+        "agents": [
+          {
+            "role": "Rick",
+            "policy": "SentinelRick",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": 3.5493383407592773,
+            "distance": 39.05008316040039,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Negan",
+            "policy": "SentinelNegan",
+            "modelHash": "none",
+            "health": 132.0,
+            "maximumHealth": 140.0,
+            "reward": 4.052034378051758,
+            "distance": 21.008377075195312,
+            "kills": 1,
+            "alive": true
+          },
+          {
+            "role": "Scout",
+            "policy": "SentinelScout",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": 3.0826940536499023,
+            "distance": 36.72004699707031,
+            "kills": 0,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "sessionId": "99e770f5683c4a2da64a9d7d3e6306d8",
+        "episodeId": "99e770f5683c4a2da64a9d7d3e6306d8-7",
+        "runId": "unlinked",
+        "timestamp": "2026-10-29T13:17:01.7942410+00:00",
+        "mode": "validation",
+        "outcome": "interrupted",
+        "environmentFingerprint": "cbadd37d5caa4ad0d8bd8b21fe1df13acdc8693ba765a5fd6b9bc8aeb0756076",
+        "scene": "SentinelCooperation",
+        "condition": "full_team",
+        "round": 7,
+        "seed": 1440,
+        "blockedRoute": 1,
+        "safeRoute": -1,
+        "randomized": false,
+        "routeReported": false,
+        "routeReached": false,
+        "guardianCleared": false,
+        "allSurvived": true,
+        "durationSeconds": 0.019999992102384567,
+        "reportAt": -1.0,
+        "routeAt": -1.0,
+        "guardianAt": -1.0,
+        "maxSeconds": 90.0,
+        "walkerSpeed": 1.149999976158142,
+        "walkerHealth": 60.0,
+        "walkerCount": 1,
+        "agents": [
+          {
+            "role": "Rick",
+            "policy": "SentinelRick",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": -6.666664557997137e-05,
+            "distance": 0.11000080406665802,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Negan",
+            "policy": "SentinelNegan",
+            "modelHash": "none",
+            "health": 140.0,
+            "maximumHealth": 140.0,
+            "reward": -6.666664557997137e-05,
+            "distance": 0.014399883337318897,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Scout",
+            "policy": "SentinelScout",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": -6.666664557997137e-05,
+            "distance": 0.08999975770711899,
+            "kills": 0,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "sessionId": "99e770f5683c4a2da64a9d7d3e6306d8",
+        "episodeId": "99e770f5683c4a2da64a9d7d3e6306d8-8",
+        "runId": "unlinked",
+        "timestamp": "2026-10-29T13:17:01.7949460+00:00",
+        "mode": "validation",
+        "outcome": "death",
+        "environmentFingerprint": "cbadd37d5caa4ad0d8bd8b21fe1df13acdc8693ba765a5fd6b9bc8aeb0756076",
+        "scene": "SentinelCooperation",
+        "condition": "full_team",
+        "round": 8,
+        "seed": 1440,
+        "blockedRoute": 1,
+        "safeRoute": -1,
+        "randomized": false,
+        "routeReported": false,
+        "routeReached": false,
+        "guardianCleared": false,
+        "allSurvived": false,
+        "durationSeconds": 0.0,
+        "reportAt": -1.0,
+        "routeAt": -1.0,
+        "guardianAt": -1.0,
+        "maxSeconds": 90.0,
+        "walkerSpeed": 1.149999976158142,
+        "walkerHealth": 60.0,
+        "walkerCount": 1,
+        "agents": [
+          {
+            "role": "Rick",
+            "policy": "SentinelRick",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": -1.0000666379928589,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Negan",
+            "policy": "SentinelNegan",
+            "modelHash": "none",
+            "health": 140.0,
+            "maximumHealth": 140.0,
+            "reward": -1.0000666379928589,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Scout",
+            "policy": "SentinelScout",
+            "modelHash": "none",
+            "health": 0.0,
+            "maximumHealth": 100.0,
+            "reward": -2.600066661834717,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": false
+          }
+        ]
+      },
+      {
+        "sessionId": "99e770f5683c4a2da64a9d7d3e6306d8",
+        "episodeId": "99e770f5683c4a2da64a9d7d3e6306d8-9",
+        "runId": "unlinked",
+        "timestamp": "2026-10-29T13:17:01.8432430+00:00",
+        "mode": "validation",
+        "outcome": "interrupted",
+        "environmentFingerprint": "cbadd37d5caa4ad0d8bd8b21fe1df13acdc8693ba765a5fd6b9bc8aeb0756076",
+        "scene": "SentinelCooperation",
+        "condition": "full_team",
+        "round": 9,
+        "seed": 1440,
+        "blockedRoute": 1,
+        "safeRoute": -1,
+        "randomized": true,
+        "routeReported": false,
+        "routeReached": false,
+        "guardianCleared": false,
+        "allSurvived": true,
+        "durationSeconds": 0.0599999763071537,
+        "reportAt": -1.0,
+        "routeAt": -1.0,
+        "guardianAt": -1.0,
+        "maxSeconds": 90.0,
+        "walkerSpeed": 1.149999976158142,
+        "walkerHealth": 60.0,
+        "walkerCount": 1,
+        "agents": [
+          {
+            "role": "Rick",
+            "policy": "SentinelRick",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": -1.0001667737960815,
+            "distance": 0.11000080406665802,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Negan",
+            "policy": "SentinelNegan",
+            "modelHash": "none",
+            "health": 140.0,
+            "maximumHealth": 140.0,
+            "reward": -1.0001667737960815,
+            "distance": 0.02160077542066574,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Scout",
+            "policy": "SentinelScout",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": -2.599344491958618,
+            "distance": 0.08999975770711899,
+            "kills": 0,
+            "alive": true
+          }
+        ]
       }
     ],
     "sources": [
@@ -6715,11 +8027,19 @@
       {
         "path": "sentinel-telemetry/96b3078c760d450b8914a851ce2d72dc.jsonl",
         "sha256": "6724ab6210ab403b6052cf69206cb94d1f1fc8f37521f953e4fd0c18ac7fab63"
+      },
+      {
+        "path": "sentinel-telemetry/99e770f5683c4a2da64a9d7d3e6306d8.jsonl",
+        "sha256": "623f10ee43e7cd2ecb75472c0417b8bcb8b3def6e4dc9a12c9c065d70ee1cd05"
       }
     ],
     "partialFilesDeferred": 0
   },
   "facts": [
+    {
+      "id": "research-coverage",
+      "text": "Days Gone Quiet research feed: 11 configured runs and 1044 recorded reward samples. Early Rick, prison, barn and Sentinel run families are discovered automatically; folders without a saved configuration are deferred. Reward scales differ between tasks and are not a shared capability score."
+    },
     {
       "id": "training-outcomes",
       "text": "Training: 0 mission completions in 2 completed episodes. Interrupted episodes are excluded. Different configurations are listed separately in the dashboard."
@@ -6770,17 +8090,53 @@
     },
     {
       "id": "run-sentinel-connection-smoke-v1",
-      "text": "sentinel-connection-smoke-v1 (smoke test). SentinelRick: 2057 checkpoint steps; SentinelNegan: 2057 checkpoint steps; SentinelScout: 2057 checkpoint steps. Training reward is not mission success."
+      "text": "sentinel-connection-smoke-v1 (smoke test). SentinelRick: 2057 checkpoint steps / 2000 configured target, 2 reward samples; SentinelNegan: 2057 checkpoint steps / 2000 configured target, 2 reward samples; SentinelScout: 2057 checkpoint steps / 2000 configured target, 2 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
     },
     {
       "id": "run-sentinel-smoke-v1",
-      "text": "sentinel-smoke-v1 (smoke test). SentinelRick: 2067 checkpoint steps; SentinelNegan: 2067 checkpoint steps; SentinelScout: 2067 checkpoint steps. Training reward is not mission success."
+      "text": "sentinel-smoke-v1 (smoke test). SentinelRick: 2067 checkpoint steps / 2048 configured target, 2 reward samples; SentinelNegan: 2067 checkpoint steps / 2048 configured target, 2 reward samples; SentinelScout: 2067 checkpoint steps / 2048 configured target, 2 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
+    },
+    {
+      "id": "run-barn-team-v2",
+      "text": "barn-team-v2 (training). RickEscape: 2264 checkpoint steps / 200000 configured target, 4 reward samples; NeganCombat: 2264 checkpoint steps / 200000 configured target, 4 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
+    },
+    {
+      "id": "run-prison-duo-v1",
+      "text": "prison-duo-v1 (training). RickEscape: 124307 checkpoint steps / 200000 configured target, 248 reward samples; NeganCombat: 124307 checkpoint steps / 200000 configured target, 248 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
+    },
+    {
+      "id": "run-prison-duo-v2",
+      "text": "prison-duo-v2 (training). RickEscape: 108541 checkpoint steps / 200000 configured target, 217 reward samples; NeganCombat: 108541 checkpoint steps / 200000 configured target, 217 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
+    },
+    {
+      "id": "run-rick_lab_smoke",
+      "text": "rick_lab_smoke (smoke test). My Behavior: 12170 checkpoint steps / 200000 configured target, 2 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
+    },
+    {
+      "id": "run-rick_v1",
+      "text": "rick_v1 (training). My Behavior: no saved checkpoint steps / 200000 configured target, 2 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
+    },
+    {
+      "id": "run-rick_v2",
+      "text": "rick_v2 (training). My Behavior: 68207 checkpoint steps / 200000 configured target, 6 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
+    },
+    {
+      "id": "run-rick_yard_v2",
+      "text": "rick_yard_v2 (training). My Behavior: 24112 checkpoint steps / 200000 configured target, 4 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
+    },
+    {
+      "id": "run-rick_yard_v4",
+      "text": "rick_yard_v4 (training). My Behavior: 200058 checkpoint steps / 200000 configured target, 40 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
+    },
+    {
+      "id": "run-rick_yard_v5",
+      "text": "rick_yard_v5 (training). My Behavior: 200015 checkpoint steps / 200000 configured target, 40 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
     },
     {
       "id": "evidence-boundary",
       "text": "Scripted demonstrations and mechanics validation do not establish learned cooperation. Completing the mission requires all three roles by design; no matched baseline has yet measured a causal improvement from cooperation."
     }
   ],
-  "snapshotHash": "c9b8896dd20ae157d51b8901d69c37484670fee325e81647cff2bd247034c362",
-  "exportedAt": "2026-10-09T23:22:28.212300+00:00"
+  "snapshotHash": "82c0178e45bcf397412df4b41d41d86108914fd8ec32795e0d591e7f33bda4d9",
+  "exportedAt": "2026-10-29T13:19:11.290104+00:00"
 }

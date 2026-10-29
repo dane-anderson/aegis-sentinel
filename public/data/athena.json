@@ -1,18 +1,26 @@
 {
   "schemaVersion": 1,
   "status": "ready",
-  "sourceSnapshotHash": "c9b8896dd20ae157d51b8901d69c37484670fee325e81647cff2bd247034c362",
-  "generatedAt": "2026-10-09T23:23:22.875135+00:00",
+  "sourceSnapshotHash": "82c0178e45bcf397412df4b41d41d86108914fd8ec32795e0d591e7f33bda4d9",
+  "generatedAt": "2026-10-29T13:19:18.825442+00:00",
   "model": "qwen3.5:9b",
-  "method": "AI-selected findings from verified measurements; wording and numbers come from the evidence catalog. Batch briefing, not live chat.",
+  "method": "AI-prioritized findings with required training and interpretation context; wording and numbers come from the verified evidence catalog. Batch briefing, not live chat.",
   "findings": [
+    {
+      "id": "run-rick_yard_v5",
+      "text": "rick_yard_v5 (training). My Behavior: 200015 checkpoint steps / 200000 configured target, 40 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
+    },
+    {
+      "id": "run-barn-team-v2",
+      "text": "barn-team-v2 (training). RickEscape: 2264 checkpoint steps / 200000 configured target, 4 reward samples; NeganCombat: 2264 checkpoint steps / 200000 configured target, 4 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
+    },
+    {
+      "id": "run-prison-duo-v2",
+      "text": "prison-duo-v2 (training). RickEscape: 108541 checkpoint steps / 200000 configured target, 217 reward samples; NeganCombat: 108541 checkpoint steps / 200000 configured target, 217 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
+    },
     {
       "id": "training-outcomes",
       "text": "Training: 0 mission completions in 2 completed episodes. Interrupted episodes are excluded. Different configurations are listed separately in the dashboard."
-    },
-    {
-      "id": "scripted_demo-outcomes",
-      "text": "Scripted demonstration: 11 mission completions in 11 completed episodes. Interrupted episodes are excluded. Different configurations are listed separately in the dashboard."
     },
     {
       "id": "evidence-boundary",
