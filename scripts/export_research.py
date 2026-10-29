@@ -11,6 +11,7 @@ import yaml
 from tensorboard.backend.event_processing.event_accumulator import EventAccumulator
 
 RUN_FAMILIES = (
+    (r'sentinel-supply-[A-Za-z0-9_-]{1,60}', {'SupplyRick', 'SupplyNegan', 'SupplyScout'}, 'Prison–barn supply expedition'),
     (r'sentinel-[A-Za-z0-9_-]{1,70}', {'SentinelRick', 'SentinelNegan', 'SentinelScout'}, 'Sentinel cooperation'),
     (r'prison-duo-[A-Za-z0-9_-]{1,60}', {'RickEscape', 'NeganCombat'}, 'Prison yard'),
     (r'barn-team-[A-Za-z0-9_-]{1,60}', {'RickEscape', 'NeganCombat'}, 'Barn encounter'),
@@ -20,6 +21,7 @@ MODES = {'training', 'evaluation', 'scripted_demo', 'validation', 'untrained_or_
 TAG = 'Environment/Cumulative Reward'
 EPISODE_KEYS = ('sessionId episodeId runId timestamp mode outcome environmentFingerprint scene condition round seed blockedRoute safeRoute randomized routeReported routeReached guardianCleared allSurvived durationSeconds reportAt routeAt guardianAt maxSeconds walkerSpeed walkerHealth walkerCount').split()
 AGENT_KEYS = ('role policy modelHash health maximumHealth reward distance kills alive').split()
+SUPPLY_KEYS = ('missionType stage cargoUnits suppliesDelivered cargoCollected regrouped returnRouteReached returnedTogether regroupAt collectedAt returnAt deliveredAt damageTaken').split()
 
 def digest(p):
     return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -86,7 +88,8 @@ def export_runs(roots):
     return sorted(runs, key=lambda r: (not r['id'].startswith('sentinel-'), r['id']))
 
 def clean_episode(record):
-    if record.get('schemaVersion') != 1 or record.get('mode') not in MODES:
+    supply = record.get('schemaVersion') == 2 and record.get('missionType') == 'supply_run'
+    if (record.get('schemaVersion') != 1 and not supply) or record.get('mode') not in MODES:
         raise ValueError('Unsupported episode schema or mode')
     if not re.fullmatch(r'[a-f0-9]{32}-\d+', str(record.get('episodeId', ''))):
         raise ValueError('Invalid episode identity')
@@ -101,14 +104,30 @@ def clean_episode(record):
         if not isinstance(record.get(key), bool):
             raise ValueError('Invalid episode flag')
     agents = record.get('agents', [])
-    if {a.get('policy') for a in agents} != {'SentinelRick', 'SentinelNegan', 'SentinelScout'} or len(agents) != 3:
+    expected_policies = {'SupplyRick', 'SupplyNegan', 'SupplyScout'} if supply else {'SentinelRick', 'SentinelNegan', 'SentinelScout'}
+    if {a.get('policy') for a in agents} != expected_policies or len(agents) != 3:
         raise ValueError('Episode must contain all three policies')
-    if record['outcome'] == 'success' and not all(record[k] for k in ('routeReported', 'routeReached', 'guardianCleared', 'allSurvived')):
+    required = ('routeReported', 'routeReached', 'allSurvived') if supply else ('routeReported', 'routeReached', 'guardianCleared', 'allSurvived')
+    if record['outcome'] == 'success' and not all(record[k] for k in required):
         raise ValueError('Success without required milestones')
+    if supply:
+        for key in ('cargoCollected','regrouped','returnRouteReached','returnedTogether'):
+            if not isinstance(record.get(key),bool): raise ValueError('Invalid supply milestone')
+        for key in ('regroupAt','collectedAt','returnAt','deliveredAt','damageTaken'):
+            if not finite(record.get(key)): raise ValueError('Invalid supply measurement')
+        if any(type(record.get(k)) is not int for k in ('cargoUnits','suppliesDelivered')):
+            raise ValueError('Supply counts must be integers')
+        if not 0 <= record['suppliesDelivered'] <= record['cargoUnits'] or record['cargoUnits'] <= 0 or record['damageTaken'] < 0:
+            raise ValueError('Invalid supply count or injuries')
+        if record['outcome'] == 'success' and (not all(record[k] for k in ('cargoCollected','regrouped','returnRouteReached','returnedTogether')) or record['suppliesDelivered'] != record['cargoUnits']):
+            raise ValueError('Supply success requires cargo and the whole team home')
+        if record['outcome'] != 'success' and record['suppliesDelivered'] != 0:
+            raise ValueError('Failed supply episode cannot claim delivery')
     for agent in agents:
         if not all(finite(agent.get(k)) for k in ('health', 'maximumHealth', 'reward', 'distance', 'kills')):
             raise ValueError('Invalid agent measurement')
     result = {k: record[k] for k in EPISODE_KEYS}
+    if supply: result.update({k:record[k] for k in SUPPLY_KEYS})
     result['agents'] = [{k: a[k] for k in AGENT_KEYS} for a in agents]
     # A strict public boundary also catches accidental private strings in allowed fields.
     serialized = json.dumps(result, allow_nan=False)
@@ -146,6 +165,8 @@ def group_episodes(episodes):
     for e in episodes:
         identity = {k: e[k] for k in ('mode', 'runId', 'environmentFingerprint', 'condition', 'seed', 'randomized', 'maxSeconds', 'walkerSpeed', 'walkerHealth', 'walkerCount')}
         identity['models'] = {a['policy']: a['modelHash'] for a in e['agents']}
+        if e.get('missionType') == 'supply_run':
+            identity.update(missionType='supply_run', cargoUnits=e['cargoUnits'])
         grouped[fingerprint(identity)[:16]].append(e)
     groups = []
     for key, all_records in grouped.items():
@@ -153,6 +174,11 @@ def group_episodes(episodes):
         n = len(rows)
         count = lambda field: sum(e[field] for e in rows)
         groups.append({'id': key, 'mode': all_records[0]['mode'], 'runId': all_records[0]['runId'], 'environmentFingerprint': all_records[0]['environmentFingerprint'], 'completed': n, 'interrupted': len(all_records)-n, 'successes': sum(e['outcome'] == 'success' for e in rows), 'routeReported': count('routeReported'), 'routeReached': count('routeReached'), 'guardianCleared': count('guardianCleared'), 'allSurvived': count('allSurvived'), 'meanSeconds': sum(e['durationSeconds'] for e in rows)/n if n else None, 'lastAt': all_records[-1]['timestamp'], 'episodeIds': [e['episodeId'] for e in all_records]})
+        if all_records[0].get('missionType') == 'supply_run':
+            groups[-1].update(missionType='supply_run', cargoUnits=all_records[0]['cargoUnits'],
+                cargoCollected=count('cargoCollected'), regrouped=count('regrouped'), returnRouteReached=count('returnRouteReached'),
+                returnedTogether=count('returnedTogether'), suppliesDelivered=sum(e['suppliesDelivered'] for e in rows),
+                meanDamage=sum(e['damageTaken'] for e in rows)/n if n else None)
     return sorted(groups, key=lambda g: g['lastAt'], reverse=True)
 
 def fact_catalog(snapshot):
@@ -162,14 +188,19 @@ def fact_catalog(snapshot):
     sample_count = sum(len(p['points']) for r in snapshot['runs'] for p in r['policies'])
     add('research-coverage', f"Days Gone Quiet research feed: {len(snapshot['runs'])} configured runs and {sample_count} recorded reward samples. Early Rick, prison, barn and Sentinel run families are discovered automatically; folders without a saved configuration are deferred. Reward scales differ between tasks and are not a shared capability score.")
     for mode in ('training', 'evaluation', 'scripted_demo'):
-        groups = [g for g in snapshot['cooperation']['groups'] if g['mode'] == mode]
+        groups = [g for g in snapshot['cooperation']['groups'] if g['mode'] == mode and g.get('missionType') != 'supply_run']
         n = sum(g['completed'] for g in groups)
         wins = sum(g['successes'] for g in groups)
         label = {'training':'Training', 'evaluation':'Saved-policy evaluation', 'scripted_demo':'Scripted demonstration'}[mode]
-        add(mode + '-outcomes', f'{label}: {wins} mission completions in {n} completed episodes. Interrupted episodes are excluded. Different configurations are listed separately in the dashboard.')
+        add(mode + '-outcomes', f'Cooperation mission — {label}: {wins} mission completions in {n} completed episodes. Interrupted episodes are excluded. Different configurations are listed separately in the dashboard.')
         for key, label2 in [('routeReported','Scout reported a safe route'), ('routeReached','Rick reached the reported route'), ('guardianCleared','Negan cleared a threat')]:
             total = sum(g[key] for g in groups)
-            add(mode + '-' + key, f'{label}: {label2} in {total} of {n} completed episodes.')
+            add(mode + '-' + key, f'Cooperation mission — {label}: {label2} in {total} of {n} completed episodes.')
+        supply_groups = [g for g in snapshot['cooperation']['groups'] if g['mode'] == mode and g.get('missionType') == 'supply_run']
+        completed = sum(g['completed'] for g in supply_groups)
+        successes = sum(g['successes'] for g in supply_groups)
+        delivered = sum(g['suppliesDelivered'] for g in supply_groups)
+        add('supply-' + mode + '-outcomes', f'Supply Run — {label}: {successes} successful round trips in {completed} completed episodes; {delivered} supply units delivered. Success requires cargo retrieval, the return route, and all three survivors home. These episodes are separate from the original cooperation mission; interrupted episodes are excluded.')
     for r in snapshot['runs']:
         details = '; '.join(f"{p['name']}: {p['checkpointSteps'] if p['checkpointSteps'] is not None else 'no saved'} checkpoint steps / {p['targetSteps']} configured target, {len(p['points'])} reward samples" for p in r['policies'])
         add('run-' + r['id'], r['id'] + ' (' + r['kind'].replace('_',' ') + '). ' + details + '. Training reward is not mission success; reaching the step target is not proof of mastery.')

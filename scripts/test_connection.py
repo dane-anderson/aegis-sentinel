@@ -11,6 +11,50 @@ from athena_brief import generate_brief
 class EvidenceTests(unittest.TestCase):
     def episode(self, mode='training', outcome='success', suffix=1):
         return {'schemaVersion':1,'sessionId':'a'*32,'episodeId':'a'*32+'-'+str(suffix),'runId':'sentinel-test','timestamp':'2026-10-09T23:00:00Z','mode':mode,'eventType':'finish','outcome':outcome,'environmentFingerprint':'b'*64,'scene':'SentinelCooperation','condition':'full_team','round':suffix,'seed':1440,'blockedRoute':0,'safeRoute':1,'randomized':True,'routeReported':True,'routeReached':True,'guardianCleared':True,'allSurvived':True,'durationSeconds':12.,'reportAt':2.,'routeAt':5.,'guardianAt':4.,'maxSeconds':90.,'walkerSpeed':1.,'walkerHealth':50.,'walkerCount':1,'agents':[{'role':role,'policy':'Sentinel'+role,'modelHash':'none','health':100.,'maximumHealth':100.,'reward':2.,'distance':10.,'kills':0,'alive':True} for role in ['Rick','Negan','Scout']]}
+    def supply_episode(self, suffix=1, outcome='success'):
+        e=self.episode(suffix=suffix,outcome=outcome)
+        e.update(schemaVersion=2,missionType='supply_run',scene='SupplyRun',condition='supply_return',runId='sentinel-supply-test',stage='Deliver',cargoUnits=3,suppliesDelivered=3 if outcome=='success' else 0,cargoCollected=True,regrouped=True,returnRouteReached=True,returnedTogether=True,regroupAt=4.,collectedAt=6.,returnAt=9.,deliveredAt=12. if outcome=='success' else -1.,damageTaken=10.,guardianCleared=False)
+        for a in e['agents']:a['policy']='Supply'+a['role']
+        return e
+
+    def test_supply_outcomes_are_separate_and_interruptions_excluded(self):
+        records=[self.episode(suffix=1),self.supply_episode(suffix=2),self.supply_episode(suffix=3,outcome='timeout'),self.supply_episode(suffix=4,outcome='interrupted')]
+        groups=group_episodes([clean_episode(e) for e in records])
+        self.assertEqual(len(groups),2)
+        supply=next(g for g in groups if g.get('missionType')=='supply_run')
+        self.assertEqual((supply['completed'],supply['interrupted'],supply['successes'],supply['suppliesDelivered']),(2,1,1,3))
+        self.assertEqual(supply['meanDamage'],10.)
+        facts={f['id']:f['text'] for f in fact_catalog({'runs':[],'cooperation':{'groups':groups}})}
+        self.assertIn('1 mission completions in 1 completed episodes',facts['training-outcomes'])
+        self.assertIn('1 successful round trips in 2 completed episodes; 3 supply units delivered',facts['supply-training-outcomes'])
+
+    def test_supply_requires_cargo_and_whole_team(self):
+        for key,value in [('cargoCollected',False),('regrouped',False),('returnRouteReached',False),('returnedTogether',False),('suppliesDelivered',2),('damageTaken',float('nan'))]:
+            e=self.supply_episode();e[key]=value
+            with self.subTest(key=key),self.assertRaises(ValueError):clean_episode(e)
+        e=self.supply_episode(outcome='death');e['suppliesDelivered']=3
+        with self.assertRaises(ValueError):clean_episode(e)
+
+    def test_supply_policy_family_and_public_allowlist(self):
+        with tempfile.TemporaryDirectory() as root:
+            self.write_run(root,'sentinel-supply-smoke-v1','SupplyScout')
+            runs=export_runs([Path(root)])
+            self.assertEqual(runs[0]['kind'],'smoke_test')
+        e=self.supply_episode();e['private_note']='Do not export me'
+        self.assertNotIn('private_note',clean_episode(e))
+        e['agents'][0]['policy']='SentinelRick'
+        with self.assertRaises(ValueError):clean_episode(e)
+
+    def test_athena_must_include_supply_training_outcome(self):
+        from io import BytesIO
+        ids=['training-outcomes','supply-training-outcomes','evidence-boundary','run-rick_v2','evaluation-outcomes','scripted_demo-outcomes','research-coverage']
+        snapshot={'snapshotHash':'a'*64,'facts':[{'id':i,'text':i} for i in ids]}
+        result={'done':True,'response':json.dumps({'trainingEvidenceId':'run-rick_v2','contextEvidenceId':'research-coverage','historyEvidenceId':'run-rick_v2','nextExperiment':'train_roles'})}
+        with patch('urllib.request.urlopen',return_value=BytesIO(json.dumps(result).encode())):
+            brief=generate_brief(snapshot)
+        self.assertLessEqual(len(brief['findings']),6)
+        self.assertTrue(set(ids[:4]).issubset({f['id'] for f in brief['findings']}))
+
     def test_duplicates_and_partial_write(self):
         with tempfile.TemporaryDirectory() as folder:
             record=self.episode(); line=json.dumps(record)+'\n'
@@ -45,14 +89,14 @@ class EvidenceTests(unittest.TestCase):
     def test_athena_cannot_invent_evidence(self):
         snapshot={'snapshotHash':'a'*64,'facts':[{'id':key,'text':key} for key in ['training-outcomes','evidence-boundary','evaluation-outcomes']]}
         from io import BytesIO
-        result={'done':True,'response':json.dumps({'evidenceIds':['training-outcomes','evidence-boundary','invented-success'],'nextExperiment':'train_roles'})}
+        result={'done':True,'response':json.dumps({'trainingEvidenceId':'training-outcomes','contextEvidenceId':'invented-success','nextExperiment':'train_roles'})}
         with patch('urllib.request.urlopen',return_value=BytesIO(json.dumps(result).encode())):
             with self.assertRaises(ValueError):generate_brief(snapshot)
     def test_athena_exact_facts_preserved(self):
         facts=[{'id':key,'text':'Recorded '+key} for key in ['training-outcomes','evidence-boundary','evaluation-outcomes']]
         snapshot={'snapshotHash':'a'*64,'facts':facts}
         from io import BytesIO
-        result={'done':True,'response':json.dumps({'evidenceIds':[f['id'] for f in facts],'nextExperiment':'train_roles'})}
+        result={'done':True,'response':json.dumps({'trainingEvidenceId':'training-outcomes','contextEvidenceId':'evaluation-outcomes','nextExperiment':'train_roles'})}
         with patch('urllib.request.urlopen',return_value=BytesIO(json.dumps(result).encode())):
             brief=generate_brief(snapshot)
         self.assertEqual(brief['findings'],facts)
@@ -90,16 +134,16 @@ class EvidenceTests(unittest.TestCase):
 
     def test_athena_receives_and_must_reference_days_gone_quiet(self):
         from io import BytesIO
-        facts=[{'id':key,'text':key} for key in ['training-outcomes','evidence-boundary','run-barn-team-v3']]
+        facts=[{'id':key,'text':key} for key in ['training-outcomes','evidence-boundary','research-coverage','run-barn-team-v3']]
         snapshot={'snapshotHash':'a'*64,'facts':facts,'runs':[{'id':'barn-team-v3','kind':'training','policies':[{'name':'RickEscape','points':[]}]}]}
-        result={'done':True,'response':json.dumps({'evidenceIds':[f['id'] for f in facts],'historyEvidenceId':'run-barn-team-v3','nextExperiment':'train_roles'})}
+        result={'done':True,'response':json.dumps({'trainingEvidenceId':'training-outcomes','contextEvidenceId':'research-coverage','historyEvidenceId':'run-barn-team-v3','nextExperiment':'train_roles'})}
         with patch('urllib.request.urlopen',return_value=BytesIO(json.dumps(result).encode())) as call:
             brief=generate_brief(snapshot)
         body=json.loads(call.call_args.args[0].data)
         self.assertEqual(json.loads(body['prompt'])['runContext'][0]['id'], 'barn-team-v3')
         self.assertEqual(brief['findings'], facts)
         snapshot['facts'].append({'id':'evaluation-outcomes','text':'No evaluation'})
-        result['response']=json.dumps({'evidenceIds':['training-outcomes','evidence-boundary','evaluation-outcomes'],'nextExperiment':'train_roles'})
+        result['response']=json.dumps({'trainingEvidenceId':'training-outcomes','contextEvidenceId':'evaluation-outcomes','nextExperiment':'train_roles'})
         with patch('urllib.request.urlopen',return_value=BytesIO(json.dumps(result).encode())):
             with self.assertRaises(ValueError): generate_brief(snapshot)
 
@@ -108,10 +152,10 @@ class EvidenceTests(unittest.TestCase):
         extras = ['evaluation-outcomes', 'scripted_demo-outcomes', 'research-coverage']
         facts = [{'id':key,'text':key} for key in extras + ['training-outcomes','evidence-boundary','run-rick_v2']]
         snapshot = {'snapshotHash':'a'*64,'facts':facts}
-        result = {'done':True,'response':json.dumps({'evidenceIds':extras,'historyEvidenceId':'run-rick_v2','nextExperiment':'evaluate_frozen'})}
+        result = {'done':True,'response':json.dumps({'trainingEvidenceId':'run-rick_v2','contextEvidenceId':'research-coverage','historyEvidenceId':'run-rick_v2','nextExperiment':'evaluate_frozen'})}
         with patch('urllib.request.urlopen',return_value=BytesIO(json.dumps(result).encode())):
             brief = generate_brief(snapshot)
-        self.assertEqual(len(brief['findings']), 6)
+        self.assertLessEqual(len(brief['findings']), 6)
         self.assertTrue({'training-outcomes','evidence-boundary','run-rick_v2'}.issubset({f['id'] for f in brief['findings']}))
 
 if __name__=='__main__':unittest.main()

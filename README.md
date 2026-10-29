@@ -12,6 +12,14 @@ Unity's `SentinelTelemetry` writes append-only local JSONL records. Each episode
 
 Groups separate run, mode, source fingerprint, model hashes and experiment settings. Every outcome denominator counts an episode once, rather than once per policy. The downloaded snapshot contains the full episode evidence. Historical runs lack exact scene fingerprints and are labeled accordingly. No matched baseline has established a causal benefit from cooperation; requiring all three roles by design is not proof of that benefit.
 
+## Supply Run
+
+Supply Run connects the prison depot to the barn through two routes and a sheltered waystation. Rick retrieves three supply units, Scout reports the safer route, and Negan protects the team. Delivery requires the outward route, regrouping, cargo pickup, the return checkpoint, and all three survivors home.
+
+`SupplyRunTelemetry` emits version 2 episode records into the same local telemetry folder. The importer accepts only `SupplyRick`, `SupplyNegan`, and `SupplyScout` for this mission. Its groups and facts stay separate from the original cooperation mission. The dashboard's mission selector shows route reports, cargo collection, team return, successful trips, delivered units, injuries and duration. Validation, scripted demonstrations, training and saved-model evaluation remain distinct. Athena always receives the Supply Run training outcome alongside the original mission's outcome and interpretation limits.
+
+Use a fresh `sentinel-supply-*` run ID with `--config Assets/Expeditions/Config/supply_run.yaml` and open `SupplyRun` before pressing Play. These policies use 80 observations and must be trained from scratch; older mission models have incompatible inputs. The recorded smoke run checks connectivity and export, not learned mission mastery.
+
 ## Athena
 
 `scripts/athena_brief.py` calls the existing local Ollama service on loopback with `qwen3.5:9b`. Athena receives verified facts, grouped episode outcomes, the latest 12 relevant episodes, and checkpoint details and recent reward samples from every imported Days Gone Quiet run. Her findings must include the earlier training history when available. Different tasks retain separate reward scales; reaching a step budget is not proof of mastery. Her response selects important evidence references and a next experiment. Public finding wording and numbers come directly from the validated fact catalog, preventing model-written invented measurements. Each briefing records its model, generation time and exact snapshot fingerprint. No new paid API is required.

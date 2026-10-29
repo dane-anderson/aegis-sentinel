@@ -1,30 +1,30 @@
 {
   "schemaVersion": 1,
   "status": "ready",
-  "sourceSnapshotHash": "82c0178e45bcf397412df4b41d41d86108914fd8ec32795e0d591e7f33bda4d9",
-  "generatedAt": "2026-10-29T13:19:18.825442+00:00",
+  "sourceSnapshotHash": "0bd6561c3049b6fc9253ee564e0e8509b0914d621b34a03ab42d75a0b51b1d12",
+  "generatedAt": "2026-10-29T14:06:18.988096+00:00",
   "model": "qwen3.5:9b",
   "method": "AI-prioritized findings with required training and interpretation context; wording and numbers come from the verified evidence catalog. Batch briefing, not live chat.",
   "findings": [
     {
-      "id": "run-rick_yard_v5",
-      "text": "rick_yard_v5 (training). My Behavior: 200015 checkpoint steps / 200000 configured target, 40 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
-    },
-    {
-      "id": "run-barn-team-v2",
-      "text": "barn-team-v2 (training). RickEscape: 2264 checkpoint steps / 200000 configured target, 4 reward samples; NeganCombat: 2264 checkpoint steps / 200000 configured target, 4 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
-    },
-    {
-      "id": "run-prison-duo-v2",
-      "text": "prison-duo-v2 (training). RickEscape: 108541 checkpoint steps / 200000 configured target, 217 reward samples; NeganCombat: 108541 checkpoint steps / 200000 configured target, 217 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
-    },
-    {
-      "id": "training-outcomes",
-      "text": "Training: 0 mission completions in 2 completed episodes. Interrupted episodes are excluded. Different configurations are listed separately in the dashboard."
+      "id": "supply-training-outcomes",
+      "text": "Supply Run \u2014 Training: 0 successful round trips in 1 completed episodes; 0 supply units delivered. Success requires cargo retrieval, the return route, and all three survivors home. These episodes are separate from the original cooperation mission; interrupted episodes are excluded."
     },
     {
       "id": "evidence-boundary",
       "text": "Scripted demonstrations and mechanics validation do not establish learned cooperation. Completing the mission requires all three roles by design; no matched baseline has yet measured a causal improvement from cooperation."
+    },
+    {
+      "id": "supply-scripted_demo-outcomes",
+      "text": "Supply Run \u2014 Scripted demonstration: 0 successful round trips in 0 completed episodes; 0 supply units delivered. Success requires cargo retrieval, the return route, and all three survivors home. These episodes are separate from the original cooperation mission; interrupted episodes are excluded."
+    },
+    {
+      "id": "training-outcomes",
+      "text": "Cooperation mission \u2014 Training: 0 mission completions in 2 completed episodes. Interrupted episodes are excluded. Different configurations are listed separately in the dashboard."
+    },
+    {
+      "id": "run-rick_yard_v5",
+      "text": "rick_yard_v5 (training). My Behavior: 200015 checkpoint steps / 200000 configured target, 40 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
     }
   ],
   "nextExperiment": "Continue the three role policies, then evaluate frozen models on held-out routes. Compare mission outcomes and the Scout \u2192 Rick handoff, not reward alone."
