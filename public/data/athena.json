@@ -1,31 +1,35 @@
 {
   "schemaVersion": 1,
   "status": "ready",
-  "sourceSnapshotHash": "d8d7c91cc90e1418cf6f6a448af392ae64a87cdeccd080d4706bc2a233aab070",
-  "generatedAt": "2026-10-29T14:53:53.638465+00:00",
+  "sourceSnapshotHash": "35c67738d6b3f3172282e412fa2dd9e9fc1fb5085050ead7b92d43ff993af616",
+  "generatedAt": "2026-10-29T16:10:21.915151+00:00",
   "model": "qwen3.5:9b",
   "method": "AI-prioritized findings with required training and interpretation context; wording and numbers come from the verified evidence catalog. Batch briefing, not live chat.",
   "findings": [
     {
       "id": "supply-training-outcomes",
-      "text": "Supply Run \u2014 Training: 0 successful round trips in 1 completed episodes; 0 supply units delivered. Success requires cargo retrieval, the return route, and all three survivors home. These episodes are separate from the original cooperation mission; interrupted episodes are excluded."
+      "text": "Supply Run \u2014 Training: 0 successful round trips in 226 completed episodes; 0 supply units delivered. Success requires cargo retrieval, the return route, and all three survivors home. These episodes are separate from the original cooperation mission; interrupted episodes are excluded."
     },
     {
       "id": "evidence-boundary",
       "text": "Scripted demonstrations and mechanics validation do not establish learned cooperation. Completing the mission requires all three roles by design; no matched baseline has yet measured a causal improvement from cooperation."
     },
     {
-      "id": "supply-scripted_demo-outcomes",
-      "text": "Supply Run \u2014 Scripted demonstration: 0 successful round trips in 0 completed episodes; 0 supply units delivered. Success requires cargo retrieval, the return route, and all three survivors home. These episodes are separate from the original cooperation mission; interrupted episodes are excluded."
+      "id": "supply-evaluation-outcomes",
+      "text": "Supply Run \u2014 Saved-policy evaluation: 0 successful round trips in 48 completed episodes; 0 supply units delivered. Success requires cargo retrieval, the return route, and all three survivors home. These episodes are separate from the original cooperation mission; interrupted episodes are excluded."
     },
     {
       "id": "training-outcomes",
       "text": "Cooperation mission \u2014 Training: 0 mission completions in 2 completed episodes. Interrupted episodes are excluded. Different configurations are listed separately in the dashboard."
     },
     {
-      "id": "run-rick_yard_v5",
-      "text": "rick_yard_v5 (training). My Behavior: 200015 checkpoint steps / 200000 configured target, 40 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
+      "id": "supply-evaluation-run-sentinel-supply-v1-evalfinal",
+      "text": "Saved Supply Run team sentinel-supply-v1-evalfinal: 0/24 completed test episodes succeeded across 24 recorded configurations. Failed episodes ended at: OutboundRoute: 1; Recon: 5; Regroup: 18. Results apply to the recorded routes, threat settings and starting layouts. This small test suite does not establish broad reliability. Model hashes identify the tested team."
+    },
+    {
+      "id": "run-barn-team-v2",
+      "text": "barn-team-v2 (training). Independent PPO. RickEscape: 2264 checkpoint steps / 200000 configured target, 4 reward samples; NeganCombat: 2264 checkpoint steps / 200000 configured target, 4 reward samples. Training reward is not mission success; reaching the step target is not proof of mastery."
     }
   ],
-  "nextExperiment": "Continue the three role policies, then evaluate frozen models on held-out routes. Compare mission outcomes and the Scout \u2192 Rick handoff, not reward alone."
+  "nextExperiment": "Design a matched cooperation comparison that keeps the objective achievable in both conditions. Removing a required mission step would confound the comparison."
 }

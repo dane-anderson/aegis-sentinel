@@ -84,7 +84,7 @@ def export_runs(roots):
                 policies.append({'name': behavior, 'algorithm': settings['trainer_type'].upper(), 'targetSteps': settings['max_steps'], 'checkpointSteps': final.get('steps'), 'checkpointReward': final.get('reward'), 'checkpointAt': date(final.get('creation_time')), 'modelExportPresent': model.is_file(), 'modelHash': digest(model) if model.exists() else None, 'points': points, 'network': {'hiddenUnits': settings['network_settings']['hidden_units'], 'layers': settings['network_settings']['num_layers']}})
                 for i, event_file in enumerate(sorted((folder / behavior).glob('events.out.tfevents.*')), 1):
                     sources.append({'path': f'{folder.name}/{behavior}/TensorBoard event file {i}', 'sha256': digest(event_file)})
-            runs.append({'id': folder.name, 'kind': 'smoke_test' if 'smoke' in folder.name else 'training', 'environment': environment, 'environmentEvidence': 'Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.', 'policies': policies, 'sources': sources})
+            runs.append({'trainingMethod': 'PPO with behavior cloning from scripted demonstrations' if any(b.get('behavioral_cloning') for b in behaviors.values()) else 'Independent PPO', 'id': folder.name, 'kind': 'smoke_test' if 'smoke' in folder.name else 'training', 'environment': environment, 'environmentEvidence': 'Environment labels describe the run family, not a verified scene. Exact environment fingerprints are attached to new episode records; older reward logs alone do not identify the scene revision.', 'policies': policies, 'sources': sources})
     return sorted(runs, key=lambda r: (not r['id'].startswith('sentinel-'), r['id']))
 
 def clean_episode(record):
@@ -127,7 +127,14 @@ def clean_episode(record):
         if not all(finite(agent.get(k)) for k in ('health', 'maximumHealth', 'reward', 'distance', 'kills')):
             raise ValueError('Invalid agent measurement')
     result = {k: record[k] for k in EPISODE_KEYS}
-    if supply: result.update({k:record[k] for k in SUPPLY_KEYS})
+    if supply:
+        result.update({k:record[k] for k in SUPPLY_KEYS})
+        if 'scenario' in record or 'layoutFingerprint' in record:
+            if not re.fullmatch(r'[A-Za-z0-9_-]{1,100}',str(record.get('scenario',''))):
+                raise ValueError('Invalid supply scenario')
+            if not re.fullmatch(r'[a-f0-9]{64}',str(record.get('layoutFingerprint',''))):
+                raise ValueError('Invalid supply layout fingerprint')
+            result.update(scenario=record['scenario'],layoutFingerprint=record['layoutFingerprint'])
     result['agents'] = [{k: a[k] for k in AGENT_KEYS} for a in agents]
     # A strict public boundary also catches accidental private strings in allowed fields.
     serialized = json.dumps(result, allow_nan=False)
@@ -167,18 +174,20 @@ def group_episodes(episodes):
         identity['models'] = {a['policy']: a['modelHash'] for a in e['agents']}
         if e.get('missionType') == 'supply_run':
             identity.update(missionType='supply_run', cargoUnits=e['cargoUnits'])
+            if 'scenario' in e: identity.update(scenario=e['scenario'],layoutFingerprint=e['layoutFingerprint'])
         grouped[fingerprint(identity)[:16]].append(e)
     groups = []
     for key, all_records in grouped.items():
         rows = [e for e in all_records if e['outcome'] != 'interrupted']
         n = len(rows)
         count = lambda field: sum(e[field] for e in rows)
-        groups.append({'id': key, 'mode': all_records[0]['mode'], 'runId': all_records[0]['runId'], 'environmentFingerprint': all_records[0]['environmentFingerprint'], 'completed': n, 'interrupted': len(all_records)-n, 'successes': sum(e['outcome'] == 'success' for e in rows), 'routeReported': count('routeReported'), 'routeReached': count('routeReached'), 'guardianCleared': count('guardianCleared'), 'allSurvived': count('allSurvived'), 'meanSeconds': sum(e['durationSeconds'] for e in rows)/n if n else None, 'lastAt': all_records[-1]['timestamp'], 'episodeIds': [e['episodeId'] for e in all_records]})
+        groups.append({'id': key, 'modelHashes': {a['policy']:a['modelHash'] for a in all_records[0]['agents']}, 'mode': all_records[0]['mode'], 'runId': all_records[0]['runId'], 'environmentFingerprint': all_records[0]['environmentFingerprint'], 'completed': n, 'interrupted': len(all_records)-n, 'successes': sum(e['outcome'] == 'success' for e in rows), 'routeReported': count('routeReported'), 'routeReached': count('routeReached'), 'guardianCleared': count('guardianCleared'), 'allSurvived': count('allSurvived'), 'meanSeconds': sum(e['durationSeconds'] for e in rows)/n if n else None, 'lastAt': all_records[-1]['timestamp'], 'episodeIds': [e['episodeId'] for e in all_records]})
         if all_records[0].get('missionType') == 'supply_run':
             groups[-1].update(missionType='supply_run', cargoUnits=all_records[0]['cargoUnits'],
                 cargoCollected=count('cargoCollected'), regrouped=count('regrouped'), returnRouteReached=count('returnRouteReached'),
                 returnedTogether=count('returnedTogether'), suppliesDelivered=sum(e['suppliesDelivered'] for e in rows),
                 meanDamage=sum(e['damageTaken'] for e in rows)/n if n else None)
+            if 'scenario' in all_records[0]: groups[-1].update(scenario=all_records[0]['scenario'],layoutFingerprint=all_records[0]['layoutFingerprint'])
     return sorted(groups, key=lambda g: g['lastAt'], reverse=True)
 
 def fact_catalog(snapshot):
@@ -201,9 +210,26 @@ def fact_catalog(snapshot):
         successes = sum(g['successes'] for g in supply_groups)
         delivered = sum(g['suppliesDelivered'] for g in supply_groups)
         add('supply-' + mode + '-outcomes', f'Supply Run — {label}: {successes} successful round trips in {completed} completed episodes; {delivered} supply units delivered. Success requires cargo retrieval, the return route, and all three survivors home. These episodes are separate from the original cooperation mission; interrupted episodes are excluded.')
+        if completed:
+            milestones = '; '.join(f"{label2}: {sum(g[key] for g in supply_groups)}/{completed}" for key,label2 in [('routeReported','route reported'),('regrouped','team regrouped'),('cargoCollected','cargo collected'),('returnRouteReached','return checkpoint'),('returnedTogether','whole team home')])
+            add('supply-' + mode + '-milestones', f'Supply Run — {label}: {milestones}. Counts describe the recorded configurations, not a controlled comparison.')
+            failed = [e for e in snapshot['cooperation'].get('episodes',[]) if e.get('missionType')=='supply_run' and e['mode']==mode and e['outcome'] in {'death','timeout'}]
+            if failed:
+                stages = sorted({e['stage'] for e in failed})
+                detail = '; '.join(f"{stage}: {sum(e['stage']==stage for e in failed)}" for stage in stages)
+                add('supply-' + mode + '-failure-stages', f'Supply Run — {label}: {len(failed)} failed episodes ended at these stages: {detail}. Inspect these bottlenecks before claiming reliable delivery.')
+    evaluations = [g for g in snapshot['cooperation']['groups'] if g.get('missionType')=='supply_run' and g['mode']=='evaluation' and g['completed']]
+    for run_id in dict.fromkeys(g['runId'] for g in evaluations):
+        cases = [g for g in evaluations if g['runId']==run_id]
+        total = sum(g['completed'] for g in cases)
+        wins = sum(g['successes'] for g in cases)
+        failed = [e for e in snapshot['cooperation'].get('episodes',[]) if e.get('missionType')=='supply_run' and e['mode']=='evaluation' and e['runId']==run_id and e['outcome'] in {'death','timeout'}]
+        stages = '; '.join(f"{stage}: {sum(e['stage']==stage for e in failed)}" for stage in sorted({e['stage'] for e in failed}))
+        failure_note = f' Failed episodes ended at: {stages}.' if failed else ''
+        add('supply-evaluation-run-' + run_id, f'Saved Supply Run team {run_id}: {wins}/{total} completed test episodes succeeded across {len(cases)} recorded configurations.{failure_note} Results apply to the recorded routes, threat settings and starting layouts. This small test suite does not establish broad reliability. Model hashes identify the tested team.')
     for r in snapshot['runs']:
         details = '; '.join(f"{p['name']}: {p['checkpointSteps'] if p['checkpointSteps'] is not None else 'no saved'} checkpoint steps / {p['targetSteps']} configured target, {len(p['points'])} reward samples" for p in r['policies'])
-        add('run-' + r['id'], r['id'] + ' (' + r['kind'].replace('_',' ') + '). ' + details + '. Training reward is not mission success; reaching the step target is not proof of mastery.')
+        add('run-' + r['id'], r['id'] + ' (' + r['kind'].replace('_',' ') + '). ' + r.get('trainingMethod','Independent PPO') + '. ' + details + '. Training reward is not mission success; reaching the step target is not proof of mastery.')
     add('evidence-boundary', 'Scripted demonstrations and mechanics validation do not establish learned cooperation. Completing the mission requires all three roles by design; no matched baseline has yet measured a causal improvement from cooperation.')
     return facts
 

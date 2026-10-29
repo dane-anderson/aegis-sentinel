@@ -28,12 +28,39 @@ class EvidenceTests(unittest.TestCase):
         self.assertIn('1 mission completions in 1 completed episodes',facts['training-outcomes'])
         self.assertIn('1 successful round trips in 2 completed episodes; 3 supply units delivered',facts['supply-training-outcomes'])
 
+    def test_supply_eval_cases_keep_layouts_separate(self):
+        a=self.supply_episode();a.update(mode='evaluation',scenario='case-01',layoutFingerprint='a'*64)
+        b=self.supply_episode(suffix=2);b.update(mode='evaluation',scenario='case-02',layoutFingerprint='b'*64)
+        groups=group_episodes([clean_episode(a),clean_episode(b)])
+        self.assertEqual(len(groups),2)
+        self.assertEqual({g['scenario'] for g in groups},{'case-01','case-02'})
+        a['scenario']='/Users/private'
+        with self.assertRaises(ValueError):clean_episode(a)
+
     def test_supply_requires_cargo_and_whole_team(self):
         for key,value in [('cargoCollected',False),('regrouped',False),('returnRouteReached',False),('returnedTogether',False),('suppliesDelivered',2),('damageTaken',float('nan'))]:
             e=self.supply_episode();e[key]=value
             with self.subTest(key=key),self.assertRaises(ValueError):clean_episode(e)
         e=self.supply_episode(outcome='death');e['suppliesDelivered']=3
         with self.assertRaises(ValueError):clean_episode(e)
+
+    def test_latest_frozen_evaluation_is_required_and_failures_stay_scoped(self):
+        from io import BytesIO
+        old=self.supply_episode(outcome='timeout');old.update(mode='evaluation',stage='Collect',runId='sentinel-supply-old')
+        new=self.supply_episode(suffix=2,outcome='timeout');new.update(mode='evaluation',stage='Regroup',runId='sentinel-supply-new',timestamp='2026-10-10T23:00:00Z')
+        snapshot={'snapshotHash':'a'*64,'runs':[],'cooperation':{'groups':group_episodes([old,new]),'episodes':[old,new]}}
+        snapshot['facts']=fact_catalog(snapshot)
+        facts={f['id']:f['text'] for f in snapshot['facts']}
+        newest='supply-evaluation-run-sentinel-supply-new'
+        self.assertIn('Regroup: 1',facts[newest])
+        self.assertNotIn('Collect',facts[newest])
+        result={'done':True,'response':json.dumps({'trainingEvidenceId':'training-outcomes','contextEvidenceId':'research-coverage','nextExperiment':'improve_supply_bottleneck'})}
+        with patch('urllib.request.urlopen',return_value=BytesIO(json.dumps(result).encode())) as call:
+            brief=generate_brief(snapshot)
+        choices=json.loads(call.call_args.args[0].data)['format']['properties']['nextExperiment']['enum']
+        self.assertNotIn('evaluate_frozen',choices)
+        self.assertIn(newest,{f['id'] for f in brief['findings']})
+        self.assertLessEqual(len(brief['findings']),6)
 
     def test_supply_policy_family_and_public_allowlist(self):
         with tempfile.TemporaryDirectory() as root:
