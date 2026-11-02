@@ -1,0 +1,647 @@
+{
+  "schemaVersion": 1,
+  "snapshot": {
+    "path": "public/data/research.json",
+    "exportedAt": "2026-10-29T16:07:23.694884+00:00",
+    "snapshotHash": "35c67738d6b3f3172282e412fa2dd9e9fc1fb5085050ead7b92d43ff993af616",
+    "sourceRepository": "https://github.com/dane-anderson/days_gone_quiet",
+    "sourceCommit": "953c63518c142ab8f540dc433503c185bb973736",
+    "scope": "Automatically exported training records and separately classified episode outcomes. No controlled cooperation improvement is claimed.",
+    "freshnessLabel": "Published research snapshot \u00b7 29 October 2026"
+  },
+  "facts": {
+    "trainingRunId": "sentinel-supply-v1",
+    "trainingMethod": "PPO with behavior cloning from scripted demonstrations",
+    "checkpointStepsPerPolicy": 500047,
+    "modelHashes": {
+      "SupplyRick": "2c1c8ac3df9637b7d57bc0372cc2b3de97a75895f762eb96670da2a165195062",
+      "SupplyNegan": "5fe3919ae9974906679362e1de644502d77a463992e044276928e11e5463727b",
+      "SupplyScout": "9f9045953232603a80a0ae70394918ba2403f76505a8e4b0b697743c3e60366d"
+    },
+    "finalEvaluation": {
+      "runId": "sentinel-supply-v1-evalfinal",
+      "completed": 24,
+      "successes": 0,
+      "deliveredSupplyUnits": 0,
+      "failureStages": {
+        "Recon": 5,
+        "Regroup": 18,
+        "OutboundRoute": 1
+      },
+      "outcomes": {
+        "timeout": 18,
+        "death": 6
+      },
+      "milestones": {
+        "routeReported": 19,
+        "routeReached": 18,
+        "regrouped": 0,
+        "cargoCollected": 0,
+        "returnRouteReached": 0,
+        "returnedTogether": 0
+      },
+      "testFactors": {
+        "dangerRoutes": 2,
+        "walkerSpeeds": 3,
+        "walkerHealthSettings": 2,
+        "startingLayouts": 2
+      },
+      "cases": 24
+    },
+    "scriptedPractice": {
+      "runId": "sentinel-supply-practice-v1",
+      "completed": 16,
+      "successes": 16,
+      "deliveredSupplyUnits": 48,
+      "classification": "scripted_demo"
+    },
+    "mechanicsValidation": {
+      "runId": "sentinel-supply-suite-validation-v2",
+      "completed": 24,
+      "successes": 24,
+      "classification": "validation"
+    },
+    "earlierEvaluation": {
+      "runId": "sentinel-supply-v1-eval150k",
+      "completed": 24,
+      "successes": 0,
+      "failureStages": {
+        "Regroup": 12,
+        "Collect": 6,
+        "OutboundRoute": 6
+      }
+    },
+    "relevantFactIds": [
+      "supply-scripted_demo-outcomes",
+      "supply-evaluation-run-sentinel-supply-v1-evalfinal",
+      "supply-evaluation-run-sentinel-supply-v1-eval150k",
+      "run-sentinel-supply-v1"
+    ]
+  },
+  "selectedEpisodes": [
+    {
+      "episodeId": "e054e5f4b7354b04956facab6ec79214-2",
+      "purpose": "Main failure segment: the team reaches Regroup, survives, but does not complete the regroup milestone before time expires.",
+      "displayLabel": "Final saved team \u00b7 recorded milestones",
+      "summary": "Route reported at 0.08 s; outward route reached at 39.68 s; time expires at 240.01 s in Regroup. No cargo collected. All three survive.",
+      "inferenceLimit": "No spatial trajectory was recorded here. Do not invent which agent waited where or show animated movement as observed movement.",
+      "milestones": [
+        {
+          "key": "reportAt",
+          "seconds": 0.07999996840953827,
+          "reached": true
+        },
+        {
+          "key": "routeAt",
+          "seconds": 39.68071746826172,
+          "reached": true
+        },
+        {
+          "key": "regroupAt",
+          "seconds": -1.0,
+          "reached": false
+        },
+        {
+          "key": "collectedAt",
+          "seconds": -1.0,
+          "reached": false
+        },
+        {
+          "key": "returnAt",
+          "seconds": -1.0,
+          "reached": false
+        },
+        {
+          "key": "deliveredAt",
+          "seconds": -1.0,
+          "reached": false
+        }
+      ],
+      "record": {
+        "sessionId": "e054e5f4b7354b04956facab6ec79214",
+        "episodeId": "e054e5f4b7354b04956facab6ec79214-2",
+        "runId": "sentinel-supply-v1-evalfinal",
+        "timestamp": "2026-10-29T15:57:03.2980050+00:00",
+        "mode": "evaluation",
+        "outcome": "timeout",
+        "environmentFingerprint": "679f2d0f9e35715b75464629443e87d64795622cf7dfdd3414b907963c008649",
+        "scene": "SupplyRunExperiment",
+        "condition": "supply_return",
+        "round": 2,
+        "seed": 6101,
+        "blockedRoute": 1,
+        "safeRoute": 0,
+        "randomized": false,
+        "routeReported": true,
+        "routeReached": true,
+        "guardianCleared": false,
+        "allSurvived": true,
+        "durationSeconds": 240.0144500732422,
+        "reportAt": 0.07999996840953827,
+        "routeAt": 39.68071746826172,
+        "guardianAt": -1.0,
+        "maxSeconds": 240.0,
+        "walkerSpeed": 1.0,
+        "walkerHealth": 60.0,
+        "walkerCount": 2,
+        "missionType": "supply_run",
+        "stage": "Regroup",
+        "cargoUnits": 3,
+        "suppliesDelivered": 0,
+        "cargoCollected": false,
+        "regrouped": false,
+        "returnRouteReached": false,
+        "returnedTogether": false,
+        "regroupAt": -1.0,
+        "collectedAt": -1.0,
+        "returnAt": -1.0,
+        "deliveredAt": -1.0,
+        "damageTaken": 0.0,
+        "scenario": "case-01-road-speed0-health0-layout0",
+        "layoutFingerprint": "8042aeca12d2fbbc083ffa4fc6cf6d9d0159af2f4f3ccd83a2baa7d6fe082b43",
+        "agents": [
+          {
+            "role": "Rick",
+            "policy": "SupplyRick",
+            "modelHash": "2c1c8ac3df9637b7d57bc0372cc2b3de97a75895f762eb96670da2a165195062",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": -0.2460545301437378,
+            "distance": 76.11843872070312,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Negan",
+            "policy": "SupplyNegan",
+            "modelHash": "5fe3919ae9974906679362e1de644502d77a463992e044276928e11e5463727b",
+            "health": 140.0,
+            "maximumHealth": 140.0,
+            "reward": -0.5501357316970825,
+            "distance": 96.8994140625,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Scout",
+            "policy": "SupplyScout",
+            "modelHash": "9f9045953232603a80a0ae70394918ba2403f76505a8e4b0b697743c3e60366d",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": -0.5501357316970825,
+            "distance": 79.40476989746094,
+            "kills": 0,
+            "alive": true
+          }
+        ]
+      }
+    },
+    {
+      "episodeId": "e054e5f4b7354b04956facab6ec79214-13",
+      "purpose": "Optional contrasting failure: an episode can fail through a death as well as through a timeout.",
+      "displayLabel": "Final saved team \u00b7 recorded milestones",
+      "summary": "Route reported at 0.06 s; outward route reached at 35.74 s; episode ends at 208.91 s in Regroup with Scout dead. Negan has zero recorded travel distance.",
+      "inferenceLimit": "The record does not establish why Negan did not move or which exact event caused Scout damage. Avoid diagnosing a causal mechanism from this one record.",
+      "milestones": [
+        {
+          "key": "reportAt",
+          "seconds": 0.0599999763071537,
+          "reached": true
+        },
+        {
+          "key": "routeAt",
+          "seconds": 35.74062728881836,
+          "reached": true
+        },
+        {
+          "key": "regroupAt",
+          "seconds": -1.0,
+          "reached": false
+        },
+        {
+          "key": "collectedAt",
+          "seconds": -1.0,
+          "reached": false
+        },
+        {
+          "key": "returnAt",
+          "seconds": -1.0,
+          "reached": false
+        },
+        {
+          "key": "deliveredAt",
+          "seconds": -1.0,
+          "reached": false
+        }
+      ],
+      "record": {
+        "sessionId": "e054e5f4b7354b04956facab6ec79214",
+        "episodeId": "e054e5f4b7354b04956facab6ec79214-13",
+        "runId": "sentinel-supply-v1-evalfinal",
+        "timestamp": "2026-10-29T15:57:29.3893130+00:00",
+        "mode": "evaluation",
+        "outcome": "death",
+        "environmentFingerprint": "679f2d0f9e35715b75464629443e87d64795622cf7dfdd3414b907963c008649",
+        "scene": "SupplyRunExperiment",
+        "condition": "supply_return",
+        "round": 13,
+        "seed": 6112,
+        "blockedRoute": 0,
+        "safeRoute": 1,
+        "randomized": false,
+        "routeReported": true,
+        "routeReached": true,
+        "guardianCleared": false,
+        "allSurvived": false,
+        "durationSeconds": 208.90780639648438,
+        "reportAt": 0.0599999763071537,
+        "routeAt": 35.74062728881836,
+        "guardianAt": -1.0,
+        "maxSeconds": 240.0,
+        "walkerSpeed": 1.0,
+        "walkerHealth": 60.0,
+        "walkerCount": 2,
+        "missionType": "supply_run",
+        "stage": "Regroup",
+        "cargoUnits": 3,
+        "suppliesDelivered": 0,
+        "cargoCollected": false,
+        "regrouped": false,
+        "returnRouteReached": false,
+        "returnedTogether": false,
+        "regroupAt": -1.0,
+        "collectedAt": -1.0,
+        "returnAt": -1.0,
+        "deliveredAt": -1.0,
+        "damageTaken": 100.0,
+        "scenario": "case-12-farm-speed0-health0-layout1",
+        "layoutFingerprint": "712f8105b45ef0e505d700de2393dfef3f9c3ae00fbe2037ed30928c0759a772",
+        "agents": [
+          {
+            "role": "Rick",
+            "policy": "SupplyRick",
+            "modelHash": "2c1c8ac3df9637b7d57bc0372cc2b3de97a75895f762eb96670da2a165195062",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": -0.1569761037826538,
+            "distance": 99.34646606445312,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Negan",
+            "policy": "SupplyNegan",
+            "modelHash": "5fe3919ae9974906679362e1de644502d77a463992e044276928e11e5463727b",
+            "health": 140.0,
+            "maximumHealth": 140.0,
+            "reward": -0.5371681451797485,
+            "distance": 0.0,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Scout",
+            "policy": "SupplyScout",
+            "modelHash": "9f9045953232603a80a0ae70394918ba2403f76505a8e4b0b697743c3e60366d",
+            "health": 0.0,
+            "maximumHealth": 100.0,
+            "reward": -2.1371498107910156,
+            "distance": 57.431270599365234,
+            "kills": 0,
+            "alive": false
+          }
+        ]
+      }
+    },
+    {
+      "episodeId": "e054e5f4b7354b04956facab6ec79214-1",
+      "purpose": "Optional example showing the team does not always even report a route.",
+      "displayLabel": "Final saved team \u00b7 recorded milestones",
+      "summary": "No route reported; timeout at 240.01 s in Recon; all three survive.",
+      "inferenceLimit": "Cannot reconstruct a path or exact sequence of decisions from aggregate distance and milestone flags.",
+      "milestones": [
+        {
+          "key": "reportAt",
+          "seconds": -1.0,
+          "reached": false
+        },
+        {
+          "key": "routeAt",
+          "seconds": -1.0,
+          "reached": false
+        },
+        {
+          "key": "regroupAt",
+          "seconds": -1.0,
+          "reached": false
+        },
+        {
+          "key": "collectedAt",
+          "seconds": -1.0,
+          "reached": false
+        },
+        {
+          "key": "returnAt",
+          "seconds": -1.0,
+          "reached": false
+        },
+        {
+          "key": "deliveredAt",
+          "seconds": -1.0,
+          "reached": false
+        }
+      ],
+      "record": {
+        "sessionId": "e054e5f4b7354b04956facab6ec79214",
+        "episodeId": "e054e5f4b7354b04956facab6ec79214-1",
+        "runId": "sentinel-supply-v1-evalfinal",
+        "timestamp": "2026-10-29T15:57:00.8990200+00:00",
+        "mode": "evaluation",
+        "outcome": "timeout",
+        "environmentFingerprint": "679f2d0f9e35715b75464629443e87d64795622cf7dfdd3414b907963c008649",
+        "scene": "SupplyRunExperiment",
+        "condition": "supply_return",
+        "round": 1,
+        "seed": 6100,
+        "blockedRoute": 0,
+        "safeRoute": -1,
+        "randomized": false,
+        "routeReported": false,
+        "routeReached": false,
+        "guardianCleared": false,
+        "allSurvived": true,
+        "durationSeconds": 240.0144500732422,
+        "reportAt": -1.0,
+        "routeAt": -1.0,
+        "guardianAt": -1.0,
+        "maxSeconds": 240.0,
+        "walkerSpeed": 1.0,
+        "walkerHealth": 60.0,
+        "walkerCount": 2,
+        "missionType": "supply_run",
+        "stage": "Recon",
+        "cargoUnits": 3,
+        "suppliesDelivered": 0,
+        "cargoCollected": false,
+        "regrouped": false,
+        "returnRouteReached": false,
+        "returnedTogether": false,
+        "regroupAt": -1.0,
+        "collectedAt": -1.0,
+        "returnAt": -1.0,
+        "deliveredAt": -1.0,
+        "damageTaken": 0.0,
+        "scenario": "case-00-farm-speed0-health0-layout0",
+        "layoutFingerprint": "c9aae58f1f12b27d8713da9af7cdb936c6b92f267d3cb5d456b6f24f77de443b",
+        "agents": [
+          {
+            "role": "Rick",
+            "policy": "SupplyRick",
+            "modelHash": "2c1c8ac3df9637b7d57bc0372cc2b3de97a75895f762eb96670da2a165195062",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": -1.099984884262085,
+            "distance": 120.7219467163086,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Negan",
+            "policy": "SupplyNegan",
+            "modelHash": "5fe3919ae9974906679362e1de644502d77a463992e044276928e11e5463727b",
+            "health": 140.0,
+            "maximumHealth": 140.0,
+            "reward": -1.099984884262085,
+            "distance": 49.27271270751953,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Scout",
+            "policy": "SupplyScout",
+            "modelHash": "9f9045953232603a80a0ae70394918ba2403f76505a8e4b0b697743c3e60366d",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": -1.099984884262085,
+            "distance": 23.630855560302734,
+            "kills": 0,
+            "alive": true
+          }
+        ]
+      }
+    },
+    {
+      "episodeId": "16cdf2d5bafc466e84da716e716b2e23-1",
+      "purpose": "Explain the intended complete mission before examining the learned team.",
+      "displayLabel": "Scripted demonstration \u00b7 recorded milestones",
+      "summary": "Report 0.00 s; outward checkpoint 8.42 s; regroup 17.48 s; cargo 26.94 s; return checkpoint 44.00 s; delivery 62.12 s; all three home, 3 units delivered.",
+      "inferenceLimit": "This is scripted behavior used for demonstration. It is not a learned-policy success. Its settings and fingerprint differ from the final evaluation; it is not a matched performance comparison.",
+      "milestones": [
+        {
+          "key": "reportAt",
+          "seconds": 0.0,
+          "reached": true
+        },
+        {
+          "key": "routeAt",
+          "seconds": 8.420001983642578,
+          "reached": true
+        },
+        {
+          "key": "regroupAt",
+          "seconds": 17.480209350585938,
+          "reached": true
+        },
+        {
+          "key": "collectedAt",
+          "seconds": 26.940425872802734,
+          "reached": true
+        },
+        {
+          "key": "returnAt",
+          "seconds": 44.000816345214844,
+          "reached": true
+        },
+        {
+          "key": "deliveredAt",
+          "seconds": 62.12123107910156,
+          "reached": true
+        }
+      ],
+      "record": {
+        "sessionId": "16cdf2d5bafc466e84da716e716b2e23",
+        "episodeId": "16cdf2d5bafc466e84da716e716b2e23-1",
+        "runId": "sentinel-supply-practice-v1",
+        "timestamp": "2026-10-29T15:43:03.6365780+00:00",
+        "mode": "scripted_demo",
+        "outcome": "success",
+        "environmentFingerprint": "33dcae08247ab4d14a421b0cf0b9f892696c9b21544372aab772fdafbb7bccf7",
+        "scene": "SupplyRunExperiment",
+        "condition": "supply_return",
+        "round": 1,
+        "seed": 6100,
+        "blockedRoute": 0,
+        "safeRoute": 1,
+        "randomized": false,
+        "routeReported": true,
+        "routeReached": true,
+        "guardianCleared": false,
+        "allSurvived": true,
+        "durationSeconds": 62.12123107910156,
+        "reportAt": 0.0,
+        "routeAt": 8.420001983642578,
+        "guardianAt": -1.0,
+        "maxSeconds": 240.0,
+        "walkerSpeed": 1.399999976158142,
+        "walkerHealth": 60.0,
+        "walkerCount": 2,
+        "missionType": "supply_run",
+        "stage": "Deliver",
+        "cargoUnits": 3,
+        "suppliesDelivered": 3,
+        "cargoCollected": true,
+        "regrouped": true,
+        "returnRouteReached": true,
+        "returnedTogether": true,
+        "regroupAt": 17.480209350585938,
+        "collectedAt": 26.940425872802734,
+        "returnAt": 44.000816345214844,
+        "deliveredAt": 62.12123107910156,
+        "damageTaken": 5.0,
+        "scenario": "practice-both-routes",
+        "layoutFingerprint": "c88d7dd359669fe92ad299589d263d3c7e54fc96c52c25ef8be1ebca7b0d02b0",
+        "agents": [
+          {
+            "role": "Rick",
+            "policy": "SupplyRick",
+            "modelHash": "none",
+            "health": 95.0,
+            "maximumHealth": 100.0,
+            "reward": 4.5521979331970215,
+            "distance": 262.7903137207031,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Negan",
+            "policy": "SupplyNegan",
+            "modelHash": "none",
+            "health": 140.0,
+            "maximumHealth": 140.0,
+            "reward": 3.6240732669830322,
+            "distance": 184.21401977539062,
+            "kills": 0,
+            "alive": true
+          },
+          {
+            "role": "Scout",
+            "policy": "SupplyScout",
+            "modelHash": "none",
+            "health": 100.0,
+            "maximumHealth": 100.0,
+            "reward": 3.6240732669830322,
+            "distance": 261.96014404296875,
+            "kills": 0,
+            "alive": true
+          }
+        ]
+      }
+    }
+  ],
+  "presentationLimits": [
+    "Use 0/24 for the final saved team; 0/48 aggregates two saved teams.",
+    "Training, scripted demonstration, mechanics validation and frozen evaluation must stay visibly separate.",
+    "Telemetry contains milestone timestamps and final agent totals, not movement trajectories, video frames or action logs. A timeline is a recorded milestone reconstruction.",
+    "Do not call the selected timeline a video, exact replay or live simulation.",
+    "Fictional AEGIS employees and concept environments may stage a field call; they are not external eyewitnesses or physical deployments.",
+    "The 24-case suite is diagnostic. It does not estimate broad real-world reliability.",
+    "Shared rewards and mission rules do not establish a measured causal benefit from cooperation. No matched cooperation baseline has established such a benefit.",
+    "The project has no demonstrated transfer to physical robots, logistics, disaster response or other real systems.",
+    "The next regrouping and corrective-demonstration experiment is proposed; no new improved team is evidenced in this snapshot.",
+    "Current source has navigation assistance and 80 structured observations; do not say the agents learn entirely from scratch or see only raw video."
+  ],
+  "externalExamples": [
+    {
+      "id": "robotics",
+      "claimType": "Demonstrated by external researchers",
+      "summary": "Simulation-trained RL walking policies were transferred to the real ANYmal robot and evaluated.",
+      "sourceIds": [
+        "robotics-anymal"
+      ]
+    },
+    {
+      "id": "fusion",
+      "claimType": "Demonstrated by external researchers",
+      "summary": "Simulation-trained RL control was validated on plasma in the TCV research tokamak.",
+      "sourceIds": [
+        "plasma-control"
+      ]
+    },
+    {
+      "id": "possible-uses",
+      "claimType": "Possible applications to discuss; not demonstrated here",
+      "summary": "Delivery-robot coordination, difficult-site inspection, and disaster-response logistics involve sequential decisions and constraints, but this project does not establish readiness for any of them.",
+      "sourceIds": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "project-readme",
+      "kind": "local project documentation",
+      "path": "README.md",
+      "supports": [
+        "mission rules",
+        "16 scripted practice trips",
+        "PPO plus behavior cloning",
+        "training-suite structure",
+        "limitations",
+        "next proposed regrouping experiment"
+      ],
+      "limitations": "Documentation describes this project, not independent validation of broad reliability."
+    },
+    {
+      "id": "published-research",
+      "kind": "published data snapshot",
+      "path": "public/data/research.json",
+      "sha256": "b3be09bdcfcf8525706fc983339880f0b8d0a42e372b412fb49621eb53a28e94",
+      "supports": [
+        "exact episode records",
+        "model hashes",
+        "final 24-case results",
+        "training checkpoints"
+      ],
+      "limitations": "Snapshot ends 2026-10-29. It is recorded evidence, not a live Unity stream."
+    },
+    {
+      "id": "rl-concepts",
+      "kind": "primary educational source",
+      "title": "OpenAI Spinning Up: Key Concepts in RL",
+      "url": "https://spinningup.openai.com/en/latest/spinningup/rl_intro.html",
+      "verifiedOn": "2026-11-02",
+      "supports": "Agent/environment loop, observations, actions, rewards, policies, and expected cumulative reward."
+    },
+    {
+      "id": "robotics-anymal",
+      "kind": "primary research paper",
+      "title": "Learning to Walk in Minutes Using Massively Parallel Deep Reinforcement Learning",
+      "authors": "Rudin, Hoeller, Reist and Hutter",
+      "year": 2022,
+      "url": "https://proceedings.mlr.press/v164/rudin22a.html",
+      "verifiedOn": "2026-11-02",
+      "supports": "Researchers trained ANYmal locomotion policies in massively parallel simulation, then transferred and validated those policies on the real robot.",
+      "limits": "This is an external robotics study. It does not establish that Days Gone Quiet policies transfer to a robot."
+    },
+    {
+      "id": "plasma-control",
+      "kind": "primary researcher account",
+      "title": "Accelerating fusion science through learned plasma control",
+      "organization": "Google DeepMind with Swiss Plasma Center / EPFL",
+      "year": 2022,
+      "url": "https://deepmind.google/blog/accelerating-fusion-science-through-learned-plasma-control/",
+      "paperUrl": "https://www.nature.com/articles/s41586-021-04301-9",
+      "verifiedOn": "2026-11-02",
+      "supports": "Researchers trained RL controllers in simulation and validated plasma-shape control on the TCV research tokamak.",
+      "limits": "A research control demonstration; do not describe this as commercial fusion power or attribute it to AEGIS."
+    }
+  ]
+}

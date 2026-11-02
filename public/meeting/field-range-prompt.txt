@@ -1,0 +1,14 @@
+Generation mode: built-in image_gen.
+Intent: new standalone project asset; inspected aegis-headquarters.jpg and sentinel-command.jpg for visual coherence.
+Final destination: work/aegis-meeting/public/meeting/assets/field-range.png
+
+Use case: stylized-concept
+Asset type: cinematic full-screen 16:9 background for a fictional AEGIS annual-meeting field call.
+Primary request: A photoreal cinematic wide scene of a futuristic autonomous-robotics training range in a rainy mountain valley at overcast dusk.
+Scene/backdrop: graphite command shelter and distant concrete test structures beneath dramatic cloud-covered mountain slopes. Real wet ground and light mist.
+Subject: practical futuristic graphite command shelter with architectural vertical fins and glass windows; a few clearly unarmed autonomous ground vehicles on a test course.
+Style/medium: premium photoreal cinematic world-building, realistic scale, materials and atmospheric perspective. Match the viewed AEGIS headquarters and command-room visual language through dark architectural graphite, vertical structural rhythm, cool slate-blue light, restrained warm illumination, and reflective wet surfaces.
+Composition/framing: wide 16:9 establishing shot viewed from the edge of a sheltered observation area. Large landscape with a useful clear foreground; architecture and distant test grounds remain readable.
+Lighting/mood: overcast dusk, subtle slate blue architectural lighting and amber work lights, calm disciplined research setting, understated near-future atmosphere.
+Materials/textures: rain-wet dark metal, glass, damp concrete, grounded vehicle wheels and sensor housings.
+Constraints: no people; no combat; no weapons; no explosions; no text, logos, labels or watermarks; no UI; no holographic overlays; no spacecraft. Produce a new standalone image, not a modification of the viewed reference images.

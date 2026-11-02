@@ -1,0 +1,32 @@
+Generation mode: built-in image_gen, separate calls for 3 new standalone portraits.
+Visual reference inspected: work/aegis-meeting/public/assets/athena-executive.jpg. Used for world/style coherence only; distinct fictional identities requested.
+
+Mira Chen
+Final destination: work/aegis-meeting/public/meeting/assets/mira-chen.png
+Use case: stylized-concept
+Asset type: polished 16:9 waist-up video-call portrait for a fictional AEGIS annual shareholder meeting.
+Style: photoreal cinematic near-future realism. Match the previously viewed Athena portrait in natural skin texture, sober graphite clothing, elegant slate-blue atmosphere, restrained metallic details and serious composed tone, but create a DIFFERENT fictional person with their own identity.
+Composition: landscape 16:9 frame, waist-up portrait, centered, direct camera eye contact, natural neutral attentive expression, background visible around both shoulders and above head, clean separation of face and environment, no close-up cropping.
+Constraints: natural believable human face, subtle futuristic communications earpiece or understated temple implant, one small silver abstract A-shaped insignia on clothing, no overlaid text, no other logos, no UI, no watermarks, no weapons. Newly generated standalone image; reference portrait is style guidance only.
+Subject: Mira Chen, fictional East Asian woman around 40, composed and precise research chief. Straight dark hair in a neat understated bob, distinct confident face. Tailored charcoal research uniform with fine subtle cyan technical trim.
+Location: elegant luminous robotics research laboratory with glass display panels carrying only abstract unlabeled light patterns, layered graphite architecture and soft cool-blue light. Calm analytical atmosphere.
+
+Elias Ward
+Final destination: work/aegis-meeting/public/meeting/assets/elias-ward.png
+Use case: stylized-concept
+Asset type: polished 16:9 waist-up video-call portrait for a fictional AEGIS annual shareholder meeting.
+Style: photoreal cinematic near-future realism. Match the previously viewed Athena portrait in natural skin texture, sober graphite clothing, elegant slate-blue atmosphere, restrained metallic details and serious composed tone, but create a DIFFERENT fictional person with their own identity.
+Composition: landscape 16:9 frame, waist-up portrait, centered, direct camera eye contact, natural neutral attentive expression, background visible around both shoulders and above head, clean separation of face and environment, no close-up cropping.
+Constraints: natural believable human face, subtle futuristic communications earpiece or understated temple implant, one small silver abstract A-shaped insignia on clothing, no overlaid text, no other logos, no UI, no watermarks, no weapons. Newly generated standalone image; reference portrait is style guidance only.
+Subject: Elias Ward, fictional Black man around 45, weathered calm field director. Short closely cut hair, subtle salt-and-pepper stubble, thoughtful confident eyes. Charcoal weatherproof technical jacket and compact communications earpiece, small silver abstract A-shaped insignia, no armor or weapons.
+Location: sheltered futuristic range command post in rainy mountains at overcast dusk, with graphite structural fins, amber work lights, wet concrete and softly visible unarmed autonomous vehicles in a robotics training yard. Restrained slate-blue tones with warm practical lighting.
+
+Rowan Vale
+Final destination: work/aegis-meeting/public/meeting/assets/rowan-vale.png
+Use case: stylized-concept
+Asset type: polished 16:9 waist-up video-call portrait for a fictional AEGIS annual shareholder meeting.
+Style: photoreal cinematic near-future realism. Match the previously viewed Athena portrait in natural skin texture, sober graphite clothing, elegant slate-blue atmosphere, restrained metallic details and serious composed tone, but create a DIFFERENT fictional person with their own identity.
+Composition: landscape 16:9 frame, waist-up portrait, centered, direct camera eye contact, natural neutral attentive expression, background visible around both shoulders and above head, clean separation of face and environment, no close-up cropping.
+Constraints: natural believable human face, subtle futuristic communications earpiece or understated temple implant, one small silver abstract A-shaped insignia on clothing, no overlaid text, no other logos, no UI, no watermarks, no weapons. Newly generated standalone image; reference portrait is style guidance only.
+Subject: Rowan Vale, fictional white androgynous/nonbinary-presenting adult in their 30s with short auburn hair, practical composed expression, observant eyes. Practical graphite survival-research jacket, small lightweight equipment harness with radio and harmless research tools, no weapons.
+Location: field station in a fictional post-collapse simulation, sheltered inside an old concrete prison-yard research outpost with overgrown weathered concrete, climbing greenery and barred industrial windows visible behind them. Practical blue-grey light and a subdued warm task lamp. Grounded, resourceful, photoreal near-future aesthetic.

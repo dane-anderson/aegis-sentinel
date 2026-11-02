@@ -28,6 +28,16 @@ Each case carries a safe scenario label, layout fingerprint, source fingerprint 
 
 ## Athena
 
+### Annual meeting
+
+`/meeting/` is a ten-minute prepared shareholder presentation with Athena, Dr. Mira Chen, Elias Ward and Rowan Vale. The fictional executives explain reinforcement learning using the pinned 29 October 2026 Supply Run evidence. The full cast, six question cues, recorded narration, captions, field-call transitions, milestone timeline, outcome charts, transcript and source links are included.
+
+Guided mode waits for the presenters to ask each question and cue the answer. Continuous mode provides a nine-second question window and a ten-minute planned schedule. Pauses and loading delays can extend the run; narration is never cut off to meet the timer. Space pauses/resumes, arrows move between segments, R replays, F enters fullscreen, M mutes and P opens presenter notes. The presenter panel is visible on the projected screen. `/meeting/guide.html` is a printable guide and complete script.
+
+This is prepared playback, not microphone recognition or live generated answers. Athena uses the approved office-reference voice, with the approved video sample for her first research handoff. The other scenes use illustrated portraits and recorded narration. The mission timeline reconstructs recorded milestone events, not spatial trajectories or video. The meeting's pinned evidence does not update when the dashboard snapshot changes; revise and regenerate the script/audio together before presenting newer results.
+
+Run `node scripts/test_meeting.cjs` for playback and evidence consistency checks. Browser QA covers the rendered controls and scenes separately.
+
 `scripts/athena_brief.py` calls the existing local Ollama service on loopback with `qwen3.5:9b`. Athena receives verified facts, grouped episode outcomes, the latest 12 relevant episodes, and checkpoint details and recent reward samples from every imported Days Gone Quiet run. Her findings must include the earlier training history when available. Different tasks retain separate reward scales; reaching a step budget is not proof of mastery. Her response selects important evidence references and a next experiment. Public finding wording and numbers come directly from the validated fact catalog, preventing model-written invented measurements. Each briefing records its model, generation time and exact snapshot fingerprint. No new paid API is required.
 
 If the local model is unavailable, measurements can still publish while the site clearly reports that Athena's AI briefing is unavailable. It retries on a later sync. This is a batch AI research briefing. The executive video remains a prerecorded fictional transmission; live conversation, persistent memory and interactive voice are future work. Browser notebook entries stay local.

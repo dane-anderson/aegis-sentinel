@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0a1119">
+  <meta name="description" content="A ten-minute AEGIS annual meeting: a fictional executive team explains real reinforcement learning experiments in Days Gone Quiet.">
+  <title>AEGIS · Annual Meeting</title>
+  <link rel="icon" href="../mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="meeting.css">
+  <script src="meeting-data.js" defer></script><script src="audio-timing.js" defer></script><script src="evidence.js" defer></script><script src="meeting.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#stage">Skip to presentation</a>
+  <header class="masthead">
+    <a class="brand" href="https://aegis-sentinel-6u5m.onrender.com/" aria-label="AEGIS website"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 31 29H20l-4-8-4 8H1L16 2Zm0 10-5 9h10Z" fill="currentColor"/></svg><span>AEGIS<small>DYNAMICS</small></span></a>
+    <div class="meeting-label">ANNUAL MEETING <span>/</span> PROJECT SENTINEL</div>
+    <div class="header-tools"><span class="session-time" id="clock">10:00</span><button id="evidence-button" class="quiet">Evidence</button><button id="fullscreen" class="quiet" aria-label="Enter fullscreen">⛶</button></div>
+  </header>
+  <main id="stage" tabindex="-1"></main>
+  <nav id="transport" class="transport" aria-label="Presentation controls" hidden>
+    <div class="playback"><button id="previous" class="round" aria-label="Previous segment">‹</button><button id="play" class="play-button" aria-label="Pause presentation">Ⅱ</button><button id="next" class="round" aria-label="Next segment">›</button><button id="sound" class="quiet" aria-pressed="true">Sound on</button></div>
+    <div class="progress-wrap"><span id="segment-label"></span><div class="progress-track"><div id="progress"></div></div></div>
+    <div class="view-tools"><button id="captions" class="quiet" aria-pressed="true">CC</button><button id="presenter" class="quiet" aria-expanded="false">Presenter</button><button id="agenda-button" class="quiet">Agenda</button></div>
+  </nav>
+  <aside id="presenter-panel" class="presenter-panel" hidden aria-label="Presenter notes"></aside>
+  <div id="status" class="status" role="status" aria-live="polite"></div>
+  <dialog id="panel" aria-labelledby="panel-title"><div class="panel-heading"><h2 id="panel-title"></h2><button id="close-panel" class="round" aria-label="Close panel">×</button></div><div id="panel-body"></div></dialog>
+  <noscript>This presentation needs JavaScript. Use the included presenter guide for the complete script.</noscript>
+</body></html>
