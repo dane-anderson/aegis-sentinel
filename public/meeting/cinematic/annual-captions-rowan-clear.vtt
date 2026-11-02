@@ -1,0 +1,541 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.787
+Before we begin, I want you to see where this intelligence starts.
+
+00:00:03.787 --> 00:00:05.680
+Rowan, take us inside Grayhaven.
+
+00:00:05.680 --> 00:00:06.887
+Welcome to Grayhaven.
+
+00:00:06.887 --> 00:00:07.922
+This is our base.
+
+00:00:07.922 --> 00:00:09.646
+That barn holds the supplies.
+
+00:00:09.646 --> 00:00:10.336
+Two routes.
+
+00:00:10.336 --> 00:00:11.313
+Three teammates.
+
+00:00:11.313 --> 00:00:13.268
+One mission: bring everyone home.
+
+00:00:13.268 --> 00:00:14.188
+Scout observes.
+
+00:00:14.188 --> 00:00:15.107
+Rick retrieves.
+
+00:00:15.107 --> 00:00:16.027
+Negan protects.
+
+00:00:16.027 --> 00:00:19.361
+We built the world, the mission, and the training system.
+
+00:00:19.361 --> 00:00:23.040
+Every run gives us another way to understand how a team learns.
+
+00:00:23.040 --> 00:00:28.845
+A mission becomes a learning problem when every decision has a consequence.
+
+00:00:28.845 --> 00:00:29.541
+Observe.
+
+00:00:29.541 --> 00:00:29.928
+Act.
+
+00:00:29.928 --> 00:00:31.322
+Receive feedback.
+
+00:00:31.322 --> 00:00:32.560
+Practice again.
+
+00:00:32.560 --> 00:00:35.896
+Now imagine those principles operating across AEGIS.
+
+00:00:35.896 --> 00:00:42.441
+A compound that rehearses supply movements, coordinates its teams, and adapts when conditions change.
+
+00:00:42.441 --> 00:00:45.200
+That is the future we are building toward.
+
+00:00:45.200 --> 00:00:50.795
+Today, we will show you the world we built, the learning inside it, and the opportunity ahead.
+
+00:00:50.795 --> 00:00:52.640
+Welcome to our annual meeting.
+
+00:00:52.640 --> 00:00:54.053
+Athena: You have seen the world.
+
+00:00:54.053 --> 00:00:56.821
+Now let us look at the intelligence inside it.
+
+00:00:56.821 --> 00:00:59.000
+Mira, what are we actually teaching?
+
+00:00:59.000 --> 00:01:03.792
+Dr. Mira Chen: We are teaching a policy: a way to choose an action from what the agent can observe.
+
+00:01:03.792 --> 00:01:06.359
+Picture Rick at the edge of the prison yard.
+
+00:01:06.359 --> 00:01:10.581
+He has a position, a mission, and information about the world around him.
+
+00:01:10.581 --> 00:01:11.836
+He chooses an action.
+
+00:01:11.836 --> 00:01:12.919
+The world changes.
+
+00:01:12.919 --> 00:01:14.174
+He receives feedback.
+
+00:01:14.174 --> 00:01:18.054
+During training, experience like this is used to update the policy.
+
+00:01:18.054 --> 00:01:23.987
+Over many attempts, the learning process searches for decisions that produce better outcomes over time.
+
+00:01:23.987 --> 00:01:25.812
+That is reinforcement learning.
+
+00:01:25.812 --> 00:01:27.809
+The important phrase is over time.
+
+00:01:27.809 --> 00:01:33.399
+Moving quickly can look useful in the moment, but a mission may depend on waiting for a teammate.
+
+00:01:33.399 --> 00:01:37.849
+Collecting supplies can look like success, but the job includes getting home.
+
+00:01:37.849 --> 00:01:42.698
+We design the environment, the available actions, the observations, and the rewards.
+
+00:01:42.698 --> 00:01:45.151
+The agent practices within that structure.
+
+00:01:45.151 --> 00:01:50.000
+Our engineering task is to make the structure express the behavior we actually want.
+
+00:01:50.000 --> 00:01:52.345
+Athena: Rowan, take us back through that mission.
+
+00:01:52.345 --> 00:01:56.920
+Show us why three useful individuals still need to learn how to work as a team.
+
+00:01:56.920 --> 00:01:58.477
+Rowan Vale: Start at the prison depot.
+
+00:01:58.477 --> 00:02:03.806
+The team has two outward routes, a sheltered waystation, and a supply cache in the barn.
+
+00:02:03.806 --> 00:02:05.782
+Rick carries the retrieval role.
+
+00:02:05.782 --> 00:02:09.016
+Scout has the wider view and reports the safer route.
+
+00:02:09.016 --> 00:02:10.872
+Negan has the protective role.
+
+00:02:10.872 --> 00:02:13.088
+Those abilities create dependencies.
+
+00:02:13.088 --> 00:02:15.363
+Information has to become a decision.
+
+00:02:15.363 --> 00:02:18.178
+A decision has to become coordinated movement.
+
+00:02:18.178 --> 00:02:23.208
+The team must regroup, collect the supplies, return, and bring every survivor home.
+
+00:02:23.208 --> 00:02:27.339
+This footage is our scripted demonstration of that intended mission.
+
+00:02:27.339 --> 00:02:32.669
+It lets you see the world and the behavior we are asking the learning system to develop.
+
+00:02:32.669 --> 00:02:36.381
+The value of Unity is that we can make this problem concrete.
+
+00:02:36.381 --> 00:02:41.052
+We can see positions, change conditions, repeat a run, and record the events.
+
+00:02:41.052 --> 00:02:47.160
+The environment gives an abstract learning problem a place where decisions have visible consequences.
+
+00:02:47.160 --> 00:02:49.407
+Athena: That gives us a mission we can see.
+
+00:02:49.407 --> 00:02:53.643
+Mira, give our shareholders the engineering foundation behind it.
+
+00:02:53.643 --> 00:02:55.440
+What can we build on today?
+
+00:02:55.440 --> 00:03:02.218
+Dr. Mira Chen: We have a working Unity environment, three specialized role policies, and a record of what happens in each run.
+
+00:03:02.218 --> 00:03:07.286
+We verified the mission mechanics across twenty-four scripted test configurations.
+
+00:03:07.286 --> 00:03:13.148
+We also produced sixteen complete scripted practice trips to demonstrate the intended behavior.
+
+00:03:13.148 --> 00:03:17.483
+Those demonstrations give the learning process examples to learn from.
+
+00:03:17.483 --> 00:03:24.200
+Each of the three role policies reached a saved checkpoint of just over five hundred thousand training steps.
+
+00:03:24.200 --> 00:03:29.939
+The training combines reinforcement learning with behavior cloning from those demonstrations.
+
+00:03:29.939 --> 00:03:36.228
+These are different parts of the foundation: the mechanics, the examples, and the trained checkpoints.
+
+00:03:36.228 --> 00:03:38.366
+Our dashboard keeps them distinct.
+
+00:03:38.366 --> 00:03:46.731
+We can save a team, hold its policy fixed, repeat a defined test suite, and inspect its route reports, mission milestones, and outcomes.
+
+00:03:46.731 --> 00:03:50.089
+End-to-end reliability is the next research milestone.
+
+00:03:50.089 --> 00:03:56.134
+What we have built is the environment and the measurement system that make that progress testable.
+
+00:03:56.134 --> 00:03:59.920
+That turns the project into a repeatable engineering process.
+
+00:03:59.920 --> 00:04:03.273
+Athena: Now step forward into the AEGIS future we are imagining.
+
+00:04:03.273 --> 00:04:05.368
+Elias is at the training compound.
+
+00:04:05.368 --> 00:04:08.960
+Elias, show us what these principles could become at scale.
+
+00:04:08.960 --> 00:04:10.615
+Elias Ward: Welcome to the proving ground.
+
+00:04:10.615 --> 00:04:14.256
+In this vision, the compound is a connected learning environment.
+
+00:04:14.256 --> 00:04:19.001
+Cargo vehicles move supplies between a receiving hangar and the teams that need them.
+
+00:04:19.001 --> 00:04:21.042
+Maintenance crews inspect equipment.
+
+00:04:21.042 --> 00:04:23.801
+A control room watches the condition of the site.
+
+00:04:23.801 --> 00:04:29.483
+Before a change reaches the physical operation, its decision process can be rehearsed in a simulation.
+
+00:04:29.483 --> 00:04:31.524
+A vehicle encounters a blocked lane.
+
+00:04:31.524 --> 00:04:32.793
+A delivery is delayed.
+
+00:04:32.793 --> 00:04:34.890
+A piece of equipment needs attention.
+
+00:04:34.890 --> 00:04:40.738
+We ask the same question you saw in Grayhaven: can local decisions add up to a successful shared mission?
+
+00:04:40.738 --> 00:04:44.324
+The setting is larger, but the underlying challenge is familiar.
+
+00:04:44.324 --> 00:04:45.813
+Information is incomplete.
+
+00:04:45.813 --> 00:04:47.082
+Resources are limited.
+
+00:04:47.082 --> 00:04:48.958
+Actions affect what happens next.
+
+00:04:48.958 --> 00:04:53.923
+Reinforcement learning gives us a way to explore policies for those sequential decisions.
+
+00:04:53.923 --> 00:05:02.640
+The proposed value is better preparation: more useful practice, clearer comparisons, and fewer surprises when people make decisions about the real operation.
+
+00:05:02.640 --> 00:05:05.604
+Athena: A compound cannot depend on every day looking the same.
+
+00:05:05.604 --> 00:05:10.400
+How does the training ground prepare a team for conditions it has not rehearsed exactly?
+
+00:05:10.400 --> 00:05:13.418
+Elias Ward: We vary the conditions and keep the mission understandable.
+
+00:05:13.418 --> 00:05:20.835
+In the AEGIS scenario, a supply vehicle might begin from a different position, a route might take longer, or a service bay might be unavailable.
+
+00:05:20.835 --> 00:05:24.415
+We want to see how the policy responds when the easy pattern changes.
+
+00:05:24.415 --> 00:05:26.256
+Some conditions belong in practice.
+
+00:05:26.256 --> 00:05:28.149
+Others are reserved for later tests.
+
+00:05:28.149 --> 00:05:33.315
+Keeping those separate helps us judge whether a behavior extends beyond the examples it already saw.
+
+00:05:33.315 --> 00:05:35.924
+The simulation is a place to rehearse and compare.
+
+00:05:35.924 --> 00:05:40.629
+A physical compound introduces new conditions, new constraints, and human responsibilities.
+
+00:05:40.629 --> 00:05:44.619
+Moving into that setting would require additional engineering and validation.
+
+00:05:44.619 --> 00:05:49.990
+That is why the vision includes people supervising the system and deciding where it is ready to be used.
+
+00:05:49.990 --> 00:05:53.468
+Learning supports the operation through a sequence of tested steps.
+
+00:05:53.468 --> 00:05:57.560
+The objective is dependable support for the people working inside the compound.
+
+00:05:57.560 --> 00:06:00.298
+Athena: Mira, the system will practice what we reward.
+
+00:06:00.298 --> 00:06:04.880
+How do we make sure a useful-looking number corresponds to a useful mission?
+
+00:06:04.880 --> 00:06:06.210
+Dr. Mira Chen: Begin with the outcome.
+
+00:06:06.210 --> 00:06:09.217
+For Supply Run, finding the cargo is one milestone.
+
+00:06:09.217 --> 00:06:13.843
+The complete objective includes returning with the supplies and the whole team.
+
+00:06:13.843 --> 00:06:16.849
+That distinction changes how we interpret progress.
+
+00:06:16.849 --> 00:06:22.285
+A policy can make one part of a task look impressive while leaving the larger job unfinished.
+
+00:06:22.285 --> 00:06:27.952
+In our future compound, the same reasoning applies to a delivery schedule or a maintenance queue.
+
+00:06:27.952 --> 00:06:33.040
+Speed is meaningful alongside completion, resource use, and the constraints people set.
+
+00:06:33.040 --> 00:06:34.717
+A reward is a design choice.
+
+00:06:34.717 --> 00:06:39.574
+It is our attempt to express an intention in a signal the learning process can use.
+
+00:06:39.574 --> 00:06:42.523
+We then inspect the behavior that signal produces.
+
+00:06:42.523 --> 00:06:48.305
+We also keep a separate evaluation: clear conditions, frozen policies, and outcomes we can compare.
+
+00:06:48.305 --> 00:06:51.023
+Training tells us what the system experienced.
+
+00:06:51.023 --> 00:06:54.782
+Evaluation tells us what the saved system did in a defined test.
+
+00:06:54.782 --> 00:06:57.384
+Shareholders should be able to ask for both.
+
+00:06:57.384 --> 00:07:01.200
+That is how evidence becomes part of the product we are building.
+
+00:07:01.200 --> 00:07:03.901
+Athena: Rowan, bring this back to the people building it.
+
+00:07:03.901 --> 00:07:08.200
+What does a productive day of reinforcement-learning work actually look like?
+
+00:07:08.200 --> 00:07:10.574
+Rowan Vale: It starts with a specific question.
+
+00:07:10.574 --> 00:07:18.034
+We build or adjust a scenario, check that its rules work, and decide what evidence would answer the question.
+
+00:07:18.034 --> 00:07:21.696
+Then we run the experiment and inspect what happened.
+
+00:07:21.696 --> 00:07:25.223
+Sometimes the next useful change is an observation.
+
+00:07:25.223 --> 00:07:30.038
+Sometimes it is a reward, a demonstration, or a better test condition.
+
+00:07:30.038 --> 00:07:33.429
+The work is connecting those choices to behavior.
+
+00:07:33.429 --> 00:07:42.109
+Dane and his project partner direct that process: choosing the experiments, checking the results, and deciding what to improve.
+
+00:07:42.109 --> 00:07:44.212
+Unity makes the world visible.
+
+00:07:44.212 --> 00:07:47.399
+The training system makes practice repeatable.
+
+00:07:47.399 --> 00:07:50.044
+Sentinel makes the record inspectable.
+
+00:07:50.044 --> 00:07:57.640
+Together they give us a way to move from an idea, to a test, to a decision about the next piece of engineering.
+
+00:07:57.640 --> 00:07:59.827
+Athena: Elias, give us the practical opportunity.
+
+00:07:59.827 --> 00:08:04.520
+What should someone watching this meeting recognize when they return to their own work?
+
+00:08:04.520 --> 00:08:08.275
+Elias Ward: Look for a process where today's decision changes tomorrow's options.
+
+00:08:08.275 --> 00:08:10.833
+A warehouse team chooses how to sequence work.
+
+00:08:10.833 --> 00:08:14.044
+A service operation decides which task should happen next.
+
+00:08:14.044 --> 00:08:17.908
+A utility system balances changing demand against available resources.
+
+00:08:17.908 --> 00:08:23.133
+These are examples of decision problems where a learning approach might be worth investigating.
+
+00:08:23.133 --> 00:08:28.303
+In our AEGIS world, those ideas come together in logistics, maintenance, energy, and training.
+
+00:08:28.303 --> 00:08:34.181
+The ambition is a compound whose supporting systems can be rehearsed together before people depend on them.
+
+00:08:34.181 --> 00:08:41.148
+Whether a learning method is useful will depend on the task, the quality of the simulation, the alternatives, and the evidence.
+
+00:08:41.148 --> 00:08:44.032
+Sometimes a simpler method will be the right choice.
+
+00:08:44.032 --> 00:08:53.502
+The business opportunity is the ability to make that comparison well: to test an idea, understand its tradeoffs, and spend effort where it produces a meaningful improvement.
+
+00:08:53.502 --> 00:08:58.400
+That is a practical engineering capability with applications beyond this fictional world.
+
+00:08:58.400 --> 00:09:02.289
+Athena: We have the world, the learning process, and a way to measure it.
+
+00:09:02.289 --> 00:09:05.640
+Mira, what turns that foundation into the next chapter?
+
+00:09:05.640 --> 00:09:09.581
+Dr. Mira Chen: The next chapter is stronger coordination across the complete mission.
+
+00:09:09.581 --> 00:09:18.870
+We can target practice at the transitions between stages, improve demonstrations where they are useful, and test the saved team against the same defined conditions.
+
+00:09:18.870 --> 00:09:24.274
+As the behavior develops, we can broaden the conditions and compare it with a matched baseline.
+
+00:09:24.274 --> 00:09:25.907
+The questions stay concrete.
+
+00:09:25.907 --> 00:09:27.933
+Does the team complete the mission?
+
+00:09:27.933 --> 00:09:29.228
+Does it stay together?
+
+00:09:29.228 --> 00:09:31.874
+Does the behavior hold when the setup changes?
+
+00:09:31.874 --> 00:09:35.590
+We record the answers and use them to choose the next experiment.
+
+00:09:35.590 --> 00:09:44.316
+The longer-term AEGIS vision builds outward from that discipline: richer simulations, more interconnected decisions, and carefully evaluated applications.
+
+00:09:44.316 --> 00:09:47.637
+A compelling world gives people a reason to pay attention.
+
+00:09:47.637 --> 00:09:51.353
+A repeatable research process gives us a reason to keep building.
+
+00:09:51.353 --> 00:10:00.360
+Our investment case today is that foundation: a working environment, specialized agents, and an expanding ability to test what intelligent teamwork can become.
+
+00:10:00.360 --> 00:10:01.322
+Athena: Thank you, Mira.
+
+00:10:01.322 --> 00:10:03.006
+Thank you, Elias and Rowan.
+
+00:10:03.006 --> 00:10:12.208
+Today you have seen the project at two scales: the real Unity world we have built, and the future AEGIS compound that gives the research a larger story.
+
+00:10:12.208 --> 00:10:15.816
+Reinforcement learning connects them through a simple idea.
+
+00:10:15.816 --> 00:10:17.560
+Decisions create experience.
+
+00:10:17.560 --> 00:10:19.485
+Experience can change a policy.
+
+00:10:19.485 --> 00:10:24.898
+The value comes from the behavior that follows, and from the evidence we use to judge it.
+
+00:10:24.898 --> 00:10:27.664
+As you leave, carry three questions with you.
+
+00:10:27.664 --> 00:10:29.408
+What can the system observe?
+
+00:10:29.408 --> 00:10:30.792
+What are we rewarding?
+
+00:10:30.792 --> 00:10:33.799
+And how will we know it learned something useful?
+
+00:10:33.799 --> 00:10:40.174
+Those questions belong in a simulation, in a training lab, and in the decisions we make about technology.
+
+00:10:40.174 --> 00:10:41.617
+This is AEGIS Dynamics.
+
+00:10:41.617 --> 00:10:42.639
+Learning to act.
+
+00:10:42.639 --> 00:10:43.782
+Learning together.
+
+00:10:43.782 --> 00:10:46.308
+Thank you for joining our annual meeting.
+
+00:10:46.308 --> 00:10:49.075
+No single system sees the entire battlefield.
+
+00:10:49.075 --> 00:10:51.360
+Intelligence must exist between them.
