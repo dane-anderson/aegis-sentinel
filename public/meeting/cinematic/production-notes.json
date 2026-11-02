@@ -1,0 +1,171 @@
+{
+  "durationSeconds": 57.44,
+  "version": "Cinematic opening pilot v2, not the complete ten-minute meeting",
+  "cuts": [
+    {
+      "name": "athena-intro",
+      "file": "athena-intro-cut.mp4",
+      "start": 0,
+      "seconds": 5.68,
+      "source": "athena-intro-speaking.mp4",
+      "sourceOffset": 0,
+      "label": "PREPARED EXECUTIVE PERFORMANCE"
+    },
+    {
+      "name": "rowan",
+      "file": "rowan-cut.mp4",
+      "start": 5.68,
+      "seconds": 4.0,
+      "source": "rowan-young-speaking.mp4",
+      "sourceOffset": 0,
+      "label": "FIELD TRANSMISSION / GRAYHAVEN"
+    },
+    {
+      "name": "yard",
+      "file": "yard-cut.mp4",
+      "start": 9.68,
+      "seconds": 2.8,
+      "source": "unity-tour.mp4",
+      "sourceOffset": 3,
+      "label": "CAPTURED IN UNITY"
+    },
+    {
+      "name": "barn",
+      "file": "barn-cut.mp4",
+      "start": 12.48,
+      "seconds": 2.4,
+      "source": "unity-tour.mp4",
+      "sourceOffset": 17,
+      "label": "CAPTURED IN UNITY"
+    },
+    {
+      "name": "route",
+      "file": "route-cut.mp4",
+      "start": 14.88,
+      "seconds": 2.8,
+      "source": "unity-tour.mp4",
+      "sourceOffset": 9,
+      "label": "CAPTURED IN UNITY"
+    },
+    {
+      "name": "scout",
+      "file": "scout-cut.mp4",
+      "start": 17.68,
+      "seconds": 2.4,
+      "source": "unity-mission-refined.mp4",
+      "sourceOffset": 5,
+      "label": "CAPTURED IN UNITY / SCRIPTED DEMONSTRATION"
+    },
+    {
+      "name": "rick",
+      "file": "rick-cut.mp4",
+      "start": 20.08,
+      "seconds": 3.2,
+      "source": "unity-mission-refined.mp4",
+      "sourceOffset": 25,
+      "label": "CAPTURED IN UNITY / SCRIPTED DEMONSTRATION"
+    },
+    {
+      "name": "team",
+      "file": "team-cut.mp4",
+      "start": 23.28,
+      "seconds": 3.28,
+      "source": "unity-mission-refined.mp4",
+      "sourceOffset": 45,
+      "label": "CAPTURED IN UNITY / SCRIPTED DEMONSTRATION"
+    },
+    {
+      "name": "learning-observe",
+      "file": "learning-observe-cut.mp4",
+      "start": 26.56,
+      "seconds": 3.12,
+      "source": "unity-mission-refined.mp4",
+      "sourceOffset": 14,
+      "label": "CAPTURED IN UNITY / SCRIPTED DEMONSTRATION"
+    },
+    {
+      "name": "learning-act",
+      "file": "learning-act-cut.mp4",
+      "start": 29.68,
+      "seconds": 3.2,
+      "source": "unity-mission-refined.mp4",
+      "sourceOffset": 26.5,
+      "label": "CAPTURED IN UNITY / SCRIPTED DEMONSTRATION"
+    },
+    {
+      "name": "learning-practice",
+      "file": "learning-practice-cut.mp4",
+      "start": 32.88,
+      "seconds": 3.2,
+      "source": "unity-tour.mp4",
+      "sourceOffset": 1,
+      "label": "CAPTURED IN UNITY"
+    },
+    {
+      "name": "command",
+      "file": "command-cut.mp4",
+      "start": 36.08,
+      "seconds": 4.2,
+      "source": "command.mp4",
+      "sourceOffset": 1,
+      "label": "AEGIS / FUTURE VISION"
+    },
+    {
+      "name": "range",
+      "file": "range-cut.mp4",
+      "start": 40.28,
+      "seconds": 4.2,
+      "source": "range.mp4",
+      "sourceOffset": 1,
+      "label": "AEGIS / FUTURE VISION"
+    },
+    {
+      "name": "headquarters",
+      "file": "headquarters-cut.mp4",
+      "start": 44.48,
+      "seconds": 4.24,
+      "source": "headquarters.mp4",
+      "sourceOffset": 2,
+      "label": "AEGIS / FUTURE VISION"
+    },
+    {
+      "name": "welcome",
+      "file": "welcome-cut.mp4",
+      "start": 48.72,
+      "seconds": 3.0,
+      "source": "athena-welcome-speaking.mp4",
+      "sourceOffset": 0,
+      "label": "PREPARED EXECUTIVE PERFORMANCE"
+    },
+    {
+      "name": "welcome-world",
+      "file": "welcome-world-cut.mp4",
+      "start": 51.72,
+      "seconds": 2.4,
+      "source": "range.mp4",
+      "sourceOffset": 6,
+      "label": "AEGIS / FUTURE VISION"
+    },
+    {
+      "name": "welcome-close",
+      "file": "welcome-close-cut.mp4",
+      "start": 54.12,
+      "seconds": 2.04,
+      "source": "athena-welcome-speaking.mp4",
+      "sourceOffset": 5.4,
+      "label": "PREPARED EXECUTIVE PERFORMANCE"
+    },
+    {
+      "name": "end",
+      "file": "end-cut.mp4",
+      "start": 56.16,
+      "seconds": 1.28,
+      "source": "headquarters.mp4",
+      "sourceOffset": 6.5,
+      "label": "OPENING PREVIEW"
+    }
+  ],
+  "unity": "Captured from the actual SupplyRun Unity scene in an isolated project copy. The active mission shots use the existing scripted demonstration with learned models unassigned. Filming changed camera position, label orientation and roof visibility only. Tour camera footage plays at 1.3x; the mission demonstration plays at normal speed.",
+  "futureVision": "AEGIS headquarters, command center and training range are fictional generated visuals derived from the existing AEGIS website artwork. No military deployment or simulation-to-real transfer is claimed.",
+  "performances": "Approved fictional faces. Athena uses the approved local voice clone. Rowan uses a lighter young-adult male voice. Faces animated from the exact narration; prepared performances, not live AI interaction."
+}

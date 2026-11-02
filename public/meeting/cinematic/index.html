@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080d12">
+  <title>AEGIS · The world we built</title>
+  <meta name="description" content="The new cinematic opening: real Days Gone Quiet footage, speaking executives, and the future AEGIS vision.">
+  <link rel="icon" href="../../mark.svg" type="image/svg+xml">
+  <style>
+    :root{color-scheme:dark;font-family:Arial,Helvetica,sans-serif;color:#e8eef0;background:#080d12}*{box-sizing:border-box}body{margin:0}a{color:inherit;text-underline-offset:4px}button,a{touch-action:manipulation}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #c9b184;outline-offset:5px}header{padding:28px 4vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #21303a}.brand{font-size:23px;letter-spacing:.2em;text-decoration:none}.brand small{display:block;font-size:8px;letter-spacing:.45em;margin-top:4px}.edition{font-size:11px;letter-spacing:.13em;color:#a3b4be}main{max-width:1440px;margin:auto;padding:40px 4vw 60px}.intro{display:flex;gap:30px;align-items:end;justify-content:space-between;margin-bottom:28px}.eyebrow{font-size:11px;letter-spacing:.19em;color:#c9b184;text-transform:uppercase}h1{font-weight:400;font-size:clamp(32px,4.5vw,62px);letter-spacing:-.045em;line-height:1.04;margin:12px 0 0}.intro>p{max-width:360px;font-size:14px;line-height:1.6;color:#9eafb9;margin:0}.screen{position:relative;background:#000;aspect-ratio:16/9;box-shadow:0 24px 80px #0007}video{width:100%;height:100%;display:block;object-fit:contain}.curtain{position:absolute;inset:0;display:grid;align-content:center;justify-items:center;gap:16px;background:linear-gradient(0deg,#050c12a6,#050c1220);padding:24px}.curtain[hidden]{display:none}.play{cursor:pointer;border:1px solid #b8c7ce88;border-radius:50%;width:78px;height:78px;background:#122433b8;backdrop-filter:blur(15px);color:#fff;font-size:26px;padding-left:8px}.play:hover{background:#365065}.curtain p{font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:0;text-shadow:0 2px 5px #000}.below{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid #21303a;padding:18px 0;font-size:12px;color:#9eafb9}.actions{display:flex;gap:22px}.description{display:grid;grid-template-columns:1fr 1fr;gap:70px;padding-top:28px;line-height:1.7;font-size:14px;color:#a9bac3}.description p{margin:0 0 12px}.description strong{font-weight:400;color:#edf1f3}details{border-top:1px solid #21303a;margin-top:30px;padding-top:20px;color:#9eafb9;font-size:13px;line-height:1.7}summary{cursor:pointer;color:#d2dde2}details p{max-width:850px}.status{font-size:14px;color:#dec994;min-height:1.5em}.screen:fullscreen{width:100vw;height:100vh;aspect-ratio:auto}.screen:fullscreen video{height:100vh}@media(max-width:700px){header{padding:20px}.edition{font-size:8px;max-width:140px;text-align:right}main{padding:28px 18px}.intro{display:block}.intro>p{margin-top:18px}.description{grid-template-columns:1fr;gap:10px}.below{flex-direction:column}.play{height:60px;width:60px}.curtain p{font-size:10px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <header><a class="brand" href="../../">AEGIS<small>DYNAMICS</small></a><span class="edition">ANNUAL MEETING / OPENING PREVIEW</span></header>
+  <main>
+    <div class="intro"><div><p class="eyebrow">Days Gone Quiet → AEGIS</p><h1>The world we built.</h1></div><p>Athena takes the chair. Rowan calls from Grayhaven. The tour begins inside the actual Unity project.</p></div>
+    <div class="screen" id="screen">
+      <video id="film" controls playsinline preload="metadata" poster="poster-v2.jpg" aria-label="AEGIS cinematic opening preview">
+        <source src="opening-v2.mp4" type="video/mp4"><track kind="captions" src="captions-v2.vtt" srclang="en" label="English">
+        Your browser cannot play this video. <a href="opening-v2.mp4">Download the opening</a>.
+      </video>
+      <div class="curtain" id="curtain"><button class="play" id="start" aria-label="Play cinematic opening">▶</button><p>Watch the new opening · 0:58</p></div>
+    </div>
+    <p class="status" id="status" role="status"></p>
+    <div class="below"><span>ONE CONTINUOUS FILM · SOUND ON · OPTIONAL CAPTIONS</span><div class="actions"><a href="opening-v2.mp4" download="AEGIS-Cinematic-Opening-v2.mp4">Download film</a><a href="../">Previous full meeting</a></div></div>
+    <div class="description"><p><strong>Real Unity footage.</strong><br>The prison depot, the supply routes, the red barn, and an existing team demonstration. The camera now takes you through the world.</p><p><strong>A cinematic direction for the full meeting.</strong><br>This opening establishes the speaking performances, Rowan’s revised voice, continuous pacing, and the transition into the future AEGIS vision. The ten-minute remake follows after this creative review.</p></div>
+    <details><summary>About the footage and performances</summary><p>The Unity environment footage was captured from Days Gone Quiet. The moving team sequence is the existing scripted mission demonstration, identified on screen. It is not a learned-policy evaluation. Filming used a separate project copy with camera adjustments and cutaway roofs.</p><p>The AEGIS command center and headquarters are fictional future-vision scenes. They illustrate the direction of the story; they do not claim a deployed military system or demonstrated transfer from Unity. Athena and Rowan are fictional characters with prepared, audio-driven performances. This preview does not listen for audience questions.</p><p><a href="production-notes.json">Production notes</a> · <a href="../evidence.json">Existing research snapshot</a></p></details>
+  </main>
+  <script>
+    const film=document.querySelector('#film'),curtain=document.querySelector('#curtain'),start=document.querySelector('#start'),status=document.querySelector('#status');
+    start.addEventListener('click',async()=>{try{await film.play();curtain.hidden=true;status.textContent='';}catch(e){status.textContent='Use the video’s play control to start, or download the film below.';curtain.hidden=true;}});
+    film.addEventListener('play',()=>{curtain.hidden=true;status.textContent='';});
+    film.addEventListener('ended',()=>{status.textContent='Opening preview complete. Replay to review the voices, performances, and pacing.';});
+    film.addEventListener('error',()=>{curtain.hidden=true;status.textContent='The video could not load. Please try the download link below.';});
+  </script>
+</body></html>
