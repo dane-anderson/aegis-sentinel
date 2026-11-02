@@ -1,5 +1,5 @@
 {
-  "durationSeconds": 633.76,
+  "durationSeconds": 640.56,
   "version": "Complete cinematic annual meeting",
   "chapters": [
     {
@@ -139,12 +139,13 @@
       "speaker": "athena",
       "title": "Closing",
       "start": 586.36,
-      "seconds": 45.8
+      "seconds": 51.0
     }
   ],
   "unity": "Actual Supply Run captures. Active agent sequences are the existing scripted demonstration, not a saved-policy evaluation.",
   "futureVision": "AEGIS facilities and compound operations are fictional future-vision illustrations. No deployed military system or demonstrated simulation-to-real transfer is claimed.",
   "voices": "Athena and Rowan use the user-approved voice references. Mira and Elias retain their existing cast voices. Prepared fictional executive performances; not live interactive calls.",
   "evidenceDate": "2026-10-29",
+  "closingQuote": "No single system sees the entire battlefield. Intelligence must exist between them.",
   "websiteCopy": "Compressed for web delivery. The local master retains higher picture quality."
 }
